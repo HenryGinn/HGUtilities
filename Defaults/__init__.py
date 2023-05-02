@@ -1,6 +1,7 @@
 import os
 import sys
-module_path = os.path.split(__file__)[0]
-sys.path.append(module_path)
+package_path = os.path.split(os.path.split(__file__)[0])[0]
+sys.path.append(package_path)
 
-from LoadDefaults import LoadDefaults as load_defaults
+from Defaults.LoadDefaults import LoadDefaults as load
+load.build_class()
