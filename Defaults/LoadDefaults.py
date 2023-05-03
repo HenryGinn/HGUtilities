@@ -1,5 +1,7 @@
 import traceback
+import inspect
 import os
+import json
 
 from Utils.Paths import make_file
 
@@ -11,8 +13,9 @@ class LoadDefaults():
         cls.parent_path = os.path.split(cls.main_path)[0]
         cls.parent_defaults_path = os.path.join(cls.parent_path, "Defaults")
 
-    def __init__(self):
+    def __init__(self, cls):
         self.set_paths()
+        self.set_defaults(cls)
 
     def set_paths(self):
         self.paths_setup()
@@ -20,7 +23,7 @@ class LoadDefaults():
         self.process_defaults_path()
 
     def paths_setup(self):
-        self.module_path = traceback.extract_stack()[-3].filename
+        self.module_path = traceback.extract_stack()[-4].filename
         self.defaults_path = self.parent_defaults_path
         self.common_path = os.path.commonpath((self.main_path, self.module_path))
 
@@ -33,3 +36,20 @@ class LoadDefaults():
     def process_defaults_path(self):
         self.defaults_path = os.path.splitext(self.defaults_path)[0] + ".txt"
         make_file(self.defaults_path)
+
+
+    def set_defaults(self, cls):
+        defaults = self.get_defaults()
+        for parameter_name, parameter_value in defaults.items():
+            setattr(cls, parameter_name, parameter_value)
+
+    def get_defaults(self):
+        with open(self.defaults_path, "r") as file:
+            defaults = self.load_defaults_from_file(file)
+        return defaults
+
+    def load_defaults_from_file(self, file):
+        try:
+            return json.load(file)
+        except:
+            return {}
