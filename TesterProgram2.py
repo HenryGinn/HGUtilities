@@ -1,7 +1,8 @@
-import HGUtilities.HGUtilities.Defaults as defaults
+import Defaults as defaults
 
 class MyClass():
 
-    pass
+    def __init__(self, **kwargs):
+        defaults.kwargs(self, **kwargs)
 
 defaults.load(MyClass)
