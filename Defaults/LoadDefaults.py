@@ -31,9 +31,16 @@ class LoadDefaults():
 
     def set_defaults_path(self):
         base = self.module_path
+        folder_names = []
+        folder_names = self.populate_folder_names(folder_names, base)
+        self.cls.defaults_path = os.path.join(self.cls.defaults_path,
+                                              *folder_names)
+
+    def populate_folder_names(self, folder_names, base):
         while base != self.common_path:
             base, folder_name = os.path.split(base)
-            self.cls.defaults_path = os.path.join(self.cls.defaults_path, folder_name)
+            folder_names.append(folder_name)
+        return folder_names[::-1]
 
     def process_defaults_path(self):
         self.cls.defaults_path = os.path.splitext(self.cls.defaults_path)[0] + ".txt"

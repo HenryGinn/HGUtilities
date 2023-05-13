@@ -1,0 +1,8 @@
+{
+  "colour": null,
+  "marker": null,
+  "linestyle": null,
+  "linewidth": null,
+  "label": null,
+  "label_units": null
+}
