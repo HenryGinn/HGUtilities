@@ -2,9 +2,10 @@ import os
 
 import numpy as np
 
+import Defaults as defaults
 from Plotting.Plot import Plot
-from Plotting.PlotUtils import get_group_indexes
-from Plotting.PlotUtils import get_group_size
+from Utils.Groups import get_group_indexes
+from Utils.Groups import get_group_size
 from Utils.Paths import make_folder
 
 class Plots():
@@ -17,63 +18,44 @@ class Plots():
     those figures is handled as a single Plot object.
     """
 
-    aspect_ratio = 2
-    universal_legend = False
-    title = "My Title"
-
     def __init__(self, lines_objects, **kwargs):
-        self.process_lines_objects(lines_objects)
-        self.kwargs = kwargs
-        self.process_kwargs()
-
-    def process_lines_objects(self, lines_objects):
+        defaults.kwargs(self, **kwargs)
         self.lines_objects = np.array(lines_objects)
-        self.total = len(lines_objects)
+    
+    def plot(self):
+        self.process_lines_objects()
+        self.process_output_mode()
+        self.plot_lines_objects()
 
-    def process_kwargs(self):
-        self.process_subplots()
-        self.process_aspect_ratio()
-        self.process_universal_legend()
+    def process_output_mode(self):
+        if self.output == "Save":
+            self.create_plots_folder()
 
-    def process_subplots(self):
-        self.set_subplot_count()
-        self.partition_lines_objects()
+    def create_plots_folder(self):
+        if hasattr(self.plots_obj, "path"):
+            return make_folder(self.plots_obj.path)
+        else:
+            raise Exception(f"Plots '{self.plots_obj.title}' has no path set")
 
-    def set_subplot_count(self):
-        subplot_count = None
-        if "subplots" in self.kwargs:
-            subplot_count = self.kwargs["subplots"]
-        self.subplot_count = get_group_size(subplot_count, self.lines_objects)
-
-    def partition_lines_objects(self):
-        group_indexes = get_group_indexes(self.total, self.subplot_count)
+    def process_lines_objects(self):
+        self.subplots = get_group_size(subplots, self.lines_objects)
+        group_indexes = get_group_indexes(self.total, self.subplots)
         self.lines_object_groups = [self.lines_objects[indexes]
                                     for indexes in group_indexes]
 
-    def process_aspect_ratio(self):
-        if "aspect_ratio" in self.kwargs:
-            self.aspect_ratio = self.kwargs["aspect_ratio"]
-
-    def process_universal_legend(self):
-        if "universal_legend" in self.kwargs:
-            self.universal_legend = self.kwargs["universal_legend"]
-    
-    def plot(self):
-        #self.set_paths()
-        for index, lines_object_group in enumerate(self.lines_object_groups):
-            plot_obj = Plot(self, lines_object_group, index)
-            plot_obj.title = self.title
+    def plot_lines_objects(self):
+        self.set_plot_objects()
+        for plot_obj in self.plot_objects:
             plot_obj.create_figure()
 
-    def set_paths(self):
-        plot_folder_name = self.get_plot_folder_name()
-        self.results_path = os.path.join(self.parent_results_path, "Plots")
-        make_folder(self.results_path)
-        self.base_path = os.path.join(self.results_path, self.title.strip())
+    def set_plot_objects(self):
+        lines_iterable = enumerate(self.lines_object_groups)
+        self.plot_objects = [Plot(self, lines_object_group, index)
+                             for index, lines_object_group in lines_iterable]
 
-    def get_plot_folder_name(self):
-        if len(self.lines_object_groups) == 1:
-            plot_folder_name = f"{self.title} Plots"
-        else:
-            plot_folder_name = f"{self.title}_Subplots_{self.subplot_count} Plots"
-        return plot_folder_name
+defaults.load(Plots)
+
+def plot(lines_objects, **kwargs):
+    plots_obj = Plots(lines_objects, **kwargs)
+    plots_obj.plot()
+    return plots_obj

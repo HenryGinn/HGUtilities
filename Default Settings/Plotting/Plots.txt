@@ -1,0 +1,5 @@
+{
+  "aspect_ratio": 1.7,
+  "universal_legend": false,
+  "title": null
+}

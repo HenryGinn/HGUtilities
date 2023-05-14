@@ -6,12 +6,6 @@ import numpy as np
 
 from Plotting.PlotShape import PlotShape
 from Plotting.PlotAxes import PlotAxes
-from Plotting.PlotUtils import update_figure_size
-from Plotting.PlotUtils import adjust_subplots
-
-plt.rcParams['font.size'] = 12
-plt.rcParams['axes.linewidth'] = 0.5
-plt.rcParams['axes.formatter.limits'] = [-5,5]
 
 class Plot():
 
@@ -22,129 +16,48 @@ class Plot():
     of Line objects associated with it.
     """
 
-    title = "My Plot"
-    save_format = "pdf"
-    prefixed = False
-    layouts = {"Constrained": True,
-               "Tight": False,
-               "Adjust": False}
-
-    def __init__(self, plots_obj, lines_objects,
-                 plot_index):
+    def __init__(self, plots_obj, lines_objects, plot_index):
         self.plots_obj = plots_obj
-        self.kwargs = plots_obj.kwargs
-        self.process_lines_objects(lines_objects)
         self.plot_index = plot_index
+        self.initialise_lines_objects(lines_objects)
         self.set_grid_size()
 
-    def process_lines_objects(self, lines_objects):
+    def initialise_lines_objects(self, lines_objects):
         self.lines_objects = lines_objects
         self.count = len(self.lines_objects)
         if self.plots_obj.universal_legend:
             self.count += 1
 
     def set_grid_size(self):
-        self.process_aspect_ratio()
         plot_shape_obj = PlotShape(self.count, self.aspect_ratio)
         self.rows, self.columns = plot_shape_obj.dimensions
 
-    def process_aspect_ratio(self):
-        self.aspect_ratio = self.plots_obj.aspect_ratio
-        if "aspect_ratio" in self.kwargs:
-            if self.kwargs["aspect_ratio"] is not None:
-                self.aspect_ratio = self.kwargs["aspect_ratio"]
-
     def create_figure(self):
-        self.process_figure_kwargs()
-        if self.prefixed:
-            self.create_prefixed_figure()
-        else:
-            self.make_initial_figure()
+        self.initialise_figure()
+        self.populate_figure()
+        self.output_figure()
+        plt.close()
+
+    def initialise_figure(self):
+        self.fig, self.axes = plt.subplots(nrows=self.rows,
+                                           ncols=self.columns)
+        self.flatten_axes()
     
-    def create_prefixed_figure(self):
-        self.make_initial_figure()
-        self.make_improved_figure()
+    def flatten_axes(self):
+        if isinstance(self.axes, np.ndarray):
+            self.axes = self.axes.flatten()
+        else:
+            self.axes = [self.axes]
 
-    def make_initial_figure(self):
-        self.create_initial_figure()
-        self.populate_initial_figure()
-        self.process_initial_figure()
-
-    def create_initial_figure(self):
-        self.fig, self.axes = plt.subplots(nrows=self.rows, ncols=self.columns,
-                                           constrained_layout=self.layouts["Constrained"])
-        self.flatten_axes()
-        self.plot_axes_obj = PlotAxes(self)
-
-    def populate_initial_figure(self):
+    def populate_figure(self):
         self.plot_axes()
+        self.remove_extra_axes()
         self.add_plot_peripherals()
-        self.modify_figure_sizes()
-
-    def process_initial_figure(self):
-        plt.show()
-        plt.close()
-        self.set_plot_settings_from_initial_figure()
-
-    def set_plot_settings_from_initial_figure(self):
-        self.plot_positions = [plt.getp(ax, "position") for ax in self.axes]
-        self.set_tick_labels()
-        self.set_axis_limits()
-
-    def set_tick_labels(self):
-        self.x_tick_labels_figure = [plt.getp(ax, "xmajorticklabels")
-                                     for ax, _ in zip(self.axes, self.lines_objects)]
-        self.y_tick_labels_figure = [plt.getp(ax, "ymajorticklabels")
-                                     for ax, _ in zip(self.axes, self.lines_objects)]
-
-    def set_axis_limits(self):
-        self.figure_x_lims = [plt.getp(ax, "xlim")
-                              for ax, _ in zip(self.axes, self.lines_objects)]
-        self.figure_y_lims = [plt.getp(ax, "ylim")
-                              for ax, _ in zip(self.axes, self.lines_objects)]
-
-    def make_improved_figure(self):
-        self.create_plot_improved_axes()
-        self.populate_improved_figure()
-        self.process_improved_figure()
-
-    def create_plot_improved_axes(self):
-        self.fig, self.axes = plt.subplots(nrows=self.rows, ncols=self.columns)
-        self.flatten_axes()
-        self.plot_axes_obj = PlotAxes(self)
-
-    def populate_improved_figure(self):
-        self.plot_axes()
-        self.set_figure_size()
-        self.add_plot_peripherals()
-
-    def process_improved_figure(self):
-        self.plot_axes_obj.improve_axes()
-        self.process_plot()
-        plt.close()
-
-    def process_figure_kwargs(self):
-        self.process_layout_kwargs()
-        self.process_prefix_kwargs()
-
-    def process_layout_kwargs(self):
-        if "layout" in self.kwargs:
-            self.set_all_layouts_to_false()
-            self.layouts[self.kwargs["layout"]] = True
-
-    def process_prefix_kwargs(self):
-        if "prefixed" in self.kwargs:
-            self.prefixed = self.kwargs["prefixed"]
-
-    def set_all_layouts_to_false(self):
-        for layout in self.layouts:
-            self.layouts[layout] = False
     
     def plot_axes(self):
         for ax, lines_obj in zip(self.axes, self.lines_objects):
             self.plot_lines(ax, lines_obj)
-            self.set_labels(ax, lines_obj)
-        self.remove_extra_axes()
+            self.set_subplot_labels(ax, lines_obj)
 
     def plot_lines(self, ax, lines_obj):
         plot_function = self.get_plot_function(ax, lines_obj)
@@ -165,19 +78,22 @@ class Plot():
                       linewidth=line_obj.linewidth,
                       label=line_obj.label)
 
-    def set_labels(self, ax, lines_obj):
+    def set_subplot_labels(self, ax, lines_obj):
         self.set_title(ax, lines_obj)
-        self.plot_axes_obj.set_axes_labels(ax, lines_obj)
+        self.set_x_axis_label(ax, lines_obj)
+        self.set_y_axis_label(ax, lines_obj)
 
     def set_title(self, ax, lines_obj):
         if hasattr(lines_obj, "title"):
             ax.set_title(lines_obj.title)
-    
-    def flatten_axes(self):
-        if isinstance(self.axes, np.ndarray):
-            self.axes = self.axes.flatten()
-        else:
-            self.axes = [self.axes]
+
+    def set_x_axis_label(self, ax, lines_obj):
+        if lines_obj.x_label is not None:
+            ax.set_xlabel(lines_obj.x_label)
+
+    def set_y_axis_label(self, ax, lines_obj):
+        if lines_obj.y_label is not None:
+            ax.set_ylabel(lines_obj.y_label)
 
     def remove_extra_axes(self):
         extra_axes = len(self.axes) - self.count
@@ -210,63 +126,34 @@ class Plot():
             if lines_obj.legend:
                 ax.legend(loc=lines_obj.legend_loc)
 
-    def modify_figure_sizes(self):
-        self.set_figure_size()
-        self.adjust_layout()
-
-    def set_figure_size(self):
-        mng = plt.get_current_fig_manager()
-        self.maximise_figure_attempt_1(mng)
-
-    def maximise_figure_attempt_1(self, mng):
-        try:
-            mng.resize(*mng.window.maxsize())
-        except:
-            self.maximise_figure_attempt_2(mng)
-
-    def maximise_figure_attempt_2(self, mng):
-        try:
-            mng.window.fullscreen()
-        except:
-            self.maximise_figure_attempt_3(mng)
-
-    def maximise_figure_attempt_3(self, mng):
-        try:
-            mng.window.state('zoomed')
-        except:
-            self.maximise_figure_attempt_4(mng)
-
-    def maximise_figure_attempt_4(self, mng):
-        try:
-            mng.full_screen_toggle()
-        except:
-            print("Could not maximise figure window")
-
-    def adjust_layout(self):
-        if self.layouts["Adjust"]:
-            plt.subplot_tool()
-        elif self.layouts["Tight"]:
-            plt.tight_layout()
-
-    def process_plot(self):
-        if not ("show" in self.kwargs and not self.kwargs["show"]):
+    def output_figure(self):
+        if self.output == "Show":
             plt.show()
-        if not("save" in self.kwargs and not self.kwargs["save"]):
-            self.save_plot()
+        else:
+            self.save_figure()
 
-    def save_plot(self):
-        file_name_data = self.get_file_name_data()
-        self.path = f"{self.plots_obj.base_path}{file_name_data}.{self.save_format}"
-        self.set_save_format()
-        self.fig.savefig(self.path, format=self.save_format,
-                         dpi=self.fig.dpi, bbox_inches='tight')
+    def save_figure(self):
+        path = self.get_figure_path()
+        plt.savefig(self.path, format=self.format)
 
-    def get_file_name_data(self):
-        file_name_data = ""
-        if len(self.plots_obj.lines_object_groups) > 1:
-            file_name_data = f"_{self.plot_index + 1}"
-        return file_name_data
+    def get_figure_path(self):
+        file_name = self.get_file_name()
+        path = os.path.join(self.plots_obj.path, file_name)
+        return path
 
-    def set_save_format(self):
-        if "format" in self.kwargs:
-            self.save_format = self.kwargs["format"]
+    def get_file_name(self):
+        if len(self.plots_obj.lines_object_groups) == 1:
+            return self.get_base_file_name()
+        else:
+            return self.get_numbered_file_name()
+
+    def get_base_file_name(self):
+        if self.title is None:
+            return "Figure"
+        else:
+            return str(self.title)
+
+    def get_numbered_file_name(self):
+        file_name = self.get_base_file_name()
+        file_name = f"{file_name} {self.plot_index + 1}"
+        return file_name

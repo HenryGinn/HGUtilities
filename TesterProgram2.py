@@ -6,3 +6,4 @@ class MyClass():
         defaults.kwargs(self, **kwargs)
 
 defaults.load(MyClass)
+
