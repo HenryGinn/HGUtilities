@@ -4,6 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
+import Defaults as defaults
 from Plotting.PlotShape import PlotShape
 from Plotting.PlotAxes import PlotAxes
 
@@ -29,7 +30,7 @@ class Plot():
             self.count += 1
 
     def set_grid_size(self):
-        plot_shape_obj = PlotShape(self.count, self.aspect_ratio)
+        plot_shape_obj = PlotShape(self.count, self.plots_obj.aspect_ratio)
         self.rows, self.columns = plot_shape_obj.dimensions
 
     def create_figure(self):
@@ -84,7 +85,7 @@ class Plot():
         self.set_y_axis_label(ax, lines_obj)
 
     def set_title(self, ax, lines_obj):
-        if hasattr(lines_obj, "title"):
+        if lines_obj.title is not None:
             ax.set_title(lines_obj.title)
 
     def set_x_axis_label(self, ax, lines_obj):
@@ -105,7 +106,7 @@ class Plot():
         self.set_legend()
 
     def set_suptitle(self):
-        if hasattr(self.plots_obj, "title"):
+        if self.plots_obj.title is not None:
             self.fig.suptitle(f"{self.plots_obj.title}")
 
     def set_legend(self):
@@ -127,17 +128,17 @@ class Plot():
                 ax.legend(loc=lines_obj.legend_loc)
 
     def output_figure(self):
-        if self.output == "Show":
+        if self.plots_obj.output == "Show":
             plt.show()
-        else:
+        elif self.plots_obj.output == "Save":
             self.save_figure()
 
     def save_figure(self):
         path = self.get_figure_path()
-        plt.savefig(self.path, format=self.format)
+        plt.savefig(path, format=self.plots_obj.format)
 
     def get_figure_path(self):
-        file_name = self.get_file_name()
+        file_name = f"{self.get_file_name()}.{self.plots_obj.format}"
         path = os.path.join(self.plots_obj.path, file_name)
         return path
 
@@ -157,3 +158,5 @@ class Plot():
         file_name = self.get_base_file_name()
         file_name = f"{file_name} {self.plot_index + 1}"
         return file_name
+
+defaults.load(Plot)

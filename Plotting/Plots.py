@@ -1,4 +1,5 @@
 import os
+import __main__
 
 import numpy as np
 
@@ -21,6 +22,7 @@ class Plots():
     def __init__(self, lines_objects, **kwargs):
         defaults.kwargs(self, **kwargs)
         self.lines_objects = np.array(lines_objects)
+        self.lines_obj_count = self.lines_objects.size
     
     def plot(self):
         self.process_lines_objects()
@@ -32,14 +34,13 @@ class Plots():
             self.create_plots_folder()
 
     def create_plots_folder(self):
-        if hasattr(self.plots_obj, "path"):
-            return make_folder(self.plots_obj.path)
-        else:
-            raise Exception(f"Plots '{self.plots_obj.title}' has no path set")
+        if self.path is None:
+            self.path = os.path.split(__main__.__file__)[0]
+        make_folder(self.path)
 
     def process_lines_objects(self):
-        self.subplots = get_group_size(subplots, self.lines_objects)
-        group_indexes = get_group_indexes(self.total, self.subplots)
+        self.subplots = get_group_size(self.subplots, self.lines_objects)
+        group_indexes = get_group_indexes(self.lines_obj_count, self.subplots)
         self.lines_object_groups = [self.lines_objects[indexes]
                                     for indexes in group_indexes]
 

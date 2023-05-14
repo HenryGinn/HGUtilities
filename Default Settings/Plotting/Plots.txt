@@ -1,5 +1,9 @@
 {
   "aspect_ratio": 1.7,
   "universal_legend": false,
-  "title": null
+  "title": null,
+  "subplots": null,
+  "output": null,
+  "path": null,
+  "format": "pdf"
 }

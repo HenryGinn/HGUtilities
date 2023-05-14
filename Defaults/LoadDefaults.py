@@ -23,7 +23,6 @@ class LoadDefaults():
         self.paths_setup()
         self.set_defaults_path()
         self.process_defaults_path()
-        print(self.cls.defaults_path)
 
     def paths_setup(self):
         self.module_path = traceback.extract_stack()[-4].filename
