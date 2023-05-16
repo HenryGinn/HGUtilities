@@ -3,7 +3,14 @@
   "universal_legend": false,
   "title": null,
   "subplots": null,
-  "output": null,
+  "output": "Show",
   "path": null,
-  "format": "pdf"
+  "dpi": "figure",
+  "format": "pdf",
+  "metadata": null,
+  "bbox_inches": null,
+  "pad_inches": 0.1,
+  "facecolor": "auto",
+  "edgecolor": "auto",
+  "backend": null
 }

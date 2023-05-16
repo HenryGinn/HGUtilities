@@ -2,7 +2,6 @@ import numpy as np
 from matplotlib.colors import hsv_to_rgb
 
 import Defaults as defaults
-from Plotting.PlotUtils import get_prefixed_numbers
 
 class Lines():
 

@@ -8,3 +8,4 @@ import Defaults as defaults
 from Plotting.Line import Line as line
 from Plotting.Lines import Lines as lines
 from Plotting.Plots import Plots as plots
+from Plotting.Plots import plot

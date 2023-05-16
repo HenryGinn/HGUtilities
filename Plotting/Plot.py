@@ -6,7 +6,7 @@ import numpy as np
 
 import Defaults as defaults
 from Plotting.PlotShape import PlotShape
-from Plotting.PlotAxes import PlotAxes
+from Plotting.PlotUtils.SaveFigure import save_figure
 
 class Plot():
 
@@ -41,7 +41,8 @@ class Plot():
 
     def initialise_figure(self):
         self.fig, self.axes = plt.subplots(nrows=self.rows,
-                                           ncols=self.columns)
+                                           ncols=self.columns,
+                                           constrained_layout=True)
         self.flatten_axes()
     
     def flatten_axes(self):
@@ -61,23 +62,38 @@ class Plot():
             self.set_subplot_labels(ax, lines_obj)
 
     def plot_lines(self, ax, lines_obj):
-        plot_function = self.get_plot_function(ax, lines_obj)
+        plot_function_data = self.get_plot_function_data(ax, lines_obj)
         for line_obj in lines_obj.line_objects:
-            self.plot_line(ax, line_obj, plot_function)
+            self.plot_line_obj(ax, line_obj, plot_function_data)
 
-    def get_plot_function(self, ax, lines_obj):
-        plot_functions = {"plot": ax.plot,
-                          "semilogy": ax.semilogy}
+    def get_plot_function_data(self, ax, lines_obj):
+        plot_functions = {"plot": (self.plot_quantitative, ax.plot),
+                          "semilogy": (self.plot_quantitative, ax.semilogy),
+                          "semilogx": (self.plot_quantitative, ax.semilogx),
+                          "loglog": (self.plot_quantitative, ax.loglog),
+                          "scatter": (self.plot_quantitative, ax.scatter),
+                          "bar": (self.plot_bar, ax.bar),
+                          "pie": (self.plot_pie, ax.pie)}
         plot_function = plot_functions[lines_obj.plot_type]
         return plot_function
+
+    def plot_line_obj(self, ax, line_obj, plot_function_data):
+        data_type_function, plot_function = plot_function_data
+        data_type_function(ax, line_obj, plot_function)
         
-    def plot_line(self, ax, line_obj, plot_function):
+    def plot_quantitative(self, ax, line_obj, plot_function):
         plot_function(line_obj.x_values, line_obj.y_values,
                       color=line_obj.colour,
                       marker=line_obj.marker,
                       linestyle=line_obj.linestyle,
                       linewidth=line_obj.linewidth,
                       label=line_obj.label)
+        
+    def plot_bar(self, ax, line_obj, plot_function):
+        plot_function(line_obj.x_values, line_obj.y_values)
+        
+    def plot_pie(self, ax, line_obj, plot_function):
+        plot_function(line_obj.y_values)
 
     def set_subplot_labels(self, ax, lines_obj):
         self.set_title(ax, lines_obj)
@@ -131,32 +147,6 @@ class Plot():
         if self.plots_obj.output == "Show":
             plt.show()
         elif self.plots_obj.output == "Save":
-            self.save_figure()
-
-    def save_figure(self):
-        path = self.get_figure_path()
-        plt.savefig(path, format=self.plots_obj.format)
-
-    def get_figure_path(self):
-        file_name = f"{self.get_file_name()}.{self.plots_obj.format}"
-        path = os.path.join(self.plots_obj.path, file_name)
-        return path
-
-    def get_file_name(self):
-        if len(self.plots_obj.lines_object_groups) == 1:
-            return self.get_base_file_name()
-        else:
-            return self.get_numbered_file_name()
-
-    def get_base_file_name(self):
-        if self.title is None:
-            return "Figure"
-        else:
-            return str(self.title)
-
-    def get_numbered_file_name(self):
-        file_name = self.get_base_file_name()
-        file_name = f"{file_name} {self.plot_index + 1}"
-        return file_name
+            save_figure(self)
 
 defaults.load(Plot)
