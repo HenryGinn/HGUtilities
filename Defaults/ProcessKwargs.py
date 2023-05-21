@@ -40,7 +40,7 @@ class ProcessKwargs():
             self.key_words_to_add.append(key_word)
 
     def add_key_words_to_defaults(self):
-        original_file_contents = load_json(self.obj.defaults_path)
+        original_file_contents = load_json(self.obj.defaults_path, suppress_errors=True)
         new_file_contents = self.add_key_words_to_file_contents(original_file_contents)
         self.save_file_contents(original_file_contents, new_file_contents)
 

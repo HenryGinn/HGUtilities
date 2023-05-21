@@ -8,46 +8,19 @@ from Utils.Paths import load_json
 
 class LoadDefaults():
 
-    @classmethod
-    def build_class(cls):
-        cls.main_path = traceback.extract_stack()[3].filename
-        cls.parent_path = os.path.split(cls.main_path)[0]
-        cls.parent_defaults_path = os.path.join(cls.parent_path, "Default Settings")
-
     def __init__(self, cls):
         self.cls = cls
-        self.set_paths()
+        self.set_defaults_path()
         self.set_defaults()
 
-    def set_paths(self):
-        self.paths_setup()
-        self.set_defaults_path()
-        self.process_defaults_path()
-
-    def paths_setup(self):
-        self.module_path = traceback.extract_stack()[-4].filename
-        self.cls.defaults_path = self.parent_defaults_path
-        self.common_path = os.path.commonpath((self.main_path, self.module_path))
-
     def set_defaults_path(self):
-        base = self.module_path
-        folder_names = []
-        folder_names = self.populate_folder_names(folder_names, base)
-        self.cls.defaults_path = os.path.join(self.cls.defaults_path,
-                                              *folder_names)
-
-    def populate_folder_names(self, folder_names, base):
-        while base != self.common_path:
-            base, folder_name = os.path.split(base)
-            folder_names.append(folder_name)
-        return folder_names[::-1]
-
-    def process_defaults_path(self):
-        self.cls.defaults_path = os.path.splitext(self.cls.defaults_path)[0] + ".txt"
-        make_file(self.cls.defaults_path)
+        module_path = traceback.extract_stack()[-3].filename
+        parent_path, module_file_name = os.path.split(module_path)
+        defaults_file_name = f"{os.path.splitext(module_file_name)[0]}.txt"
+        self.cls.defaults_path = os.path.join(parent_path, "Default Settings", defaults_file_name)
 
     def set_defaults(self):
-        self.cls.defaults = load_json(self.cls.defaults_path)
+        self.cls.defaults = load_json(self.cls.defaults_path, suppress_errors=True)
         for parameter_name, parameter_value in self.cls.defaults.items():
             setattr(self.cls, parameter_name, parameter_value)
         

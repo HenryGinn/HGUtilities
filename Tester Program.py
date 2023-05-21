@@ -1,16 +1,18 @@
-#from TesterProgram2 import MyClass
-#import Defaults as defaults
+"""
+from TesterProgram2 import MyClass
+import Defaults as defaults
 
-#help(defaults)
+obj = MyClass(my_parameter="Gav",
+              new_parameter="Moe")
 
-#obj = MyClass(my_parameter="Gav",
-              #new_parameter="Moe")
+"""
 
 import numpy as np
 
 import Plotting as plotting
 
 def get_line_obj(function, n):
+    
     x_values = np.arange(0, 2*np.pi, 0.01)
     y_values = function(n * x_values)
     line_obj = plotting.line(x_values, y_values)
