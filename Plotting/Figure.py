@@ -8,7 +8,7 @@ import Defaults as defaults
 from Plotting.PlotShape import PlotShape
 from Plotting.PlotUtils.SaveFigure import save_figure
 
-class Plot():
+class Figure():
 
     """
     An instance of Plot will be a single figure.
@@ -17,8 +17,8 @@ class Plot():
     of Line objects associated with it.
     """
 
-    def __init__(self, plots_obj, lines_objects, plot_index):
-        self.plots_obj = plots_obj
+    def __init__(self, figures_obj, lines_objects, plot_index):
+        self.figures_obj = figures_obj
         self.plot_index = plot_index
         self.initialise_lines_objects(lines_objects)
         self.set_grid_size()
@@ -26,11 +26,11 @@ class Plot():
     def initialise_lines_objects(self, lines_objects):
         self.lines_objects = lines_objects
         self.count = len(self.lines_objects)
-        if self.plots_obj.universal_legend:
+        if self.figures_obj.universal_legend:
             self.count += 1
 
     def set_grid_size(self):
-        plot_shape_obj = PlotShape(self.count, self.plots_obj.aspect_ratio)
+        plot_shape_obj = PlotShape(self.count, self.figures_obj.aspect_ratio)
         self.rows, self.columns = plot_shape_obj.dimensions
 
     def create_figure(self):
@@ -122,11 +122,11 @@ class Plot():
         self.set_legend()
 
     def set_suptitle(self):
-        if self.plots_obj.title is not None:
-            self.fig.suptitle(f"{self.plots_obj.title}")
+        if self.figures_obj.title is not None:
+            self.fig.suptitle(f"{self.figures_obj.title}")
 
     def set_legend(self):
-        if self.plots_obj.universal_legend:
+        if self.figures_obj.universal_legend:
             self.do_universal_legend()
         else:
             self.do_non_universal_legends()
@@ -144,9 +144,9 @@ class Plot():
                 ax.legend(loc=lines_obj.legend_loc)
 
     def output_figure(self):
-        if self.plots_obj.output == "Show":
+        if self.figures_obj.output == "Show":
             plt.show()
-        elif self.plots_obj.output == "Save":
+        elif self.figures_obj.output == "Save":
             save_figure(self)
 
-defaults.load(Plot)
+defaults.load(Figure)

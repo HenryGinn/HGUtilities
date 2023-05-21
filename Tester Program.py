@@ -23,5 +23,5 @@ lines_obj_2 = plotting.lines([plotting.line(["Blue", "Red", "Green"], [3, 2, 5])
 lines_obj_3 = plotting.lines([plotting.line(["Blue", "Red", "Green"], [3, 2, 5])], plot_type="bar")
 lines_objects = [lines_obj_1, lines_obj_2, lines_obj_3]
 
-plotting.plot(lines_objects)
+plotting.create_figures(lines_objects)
 

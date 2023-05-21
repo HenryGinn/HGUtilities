@@ -4,12 +4,12 @@ import __main__
 import numpy as np
 
 import Defaults as defaults
-from Plotting.Plot import Plot
+from Plotting.Figure import Figure
 from Utils.Groups import get_group_indexes
 from Utils.Groups import get_group_size
 from Utils.Paths import make_folder
 
-class Plots():
+class Figures():
 
     """
     An instance of Plots will represent several figures that are
@@ -24,7 +24,7 @@ class Plots():
         self.lines_objects = np.array(lines_objects)
         self.lines_obj_count = self.lines_objects.size
     
-    def plot(self):
+    def create_figures(self):
         self.process_lines_objects()
         self.process_output_mode()
         self.plot_lines_objects()
@@ -45,18 +45,18 @@ class Plots():
                                     for indexes in group_indexes]
 
     def plot_lines_objects(self):
-        self.set_plot_objects()
-        for plot_obj in self.plot_objects:
-            plot_obj.create_figure()
+        self.set_figure_objects()
+        for figure_obj in self.figure_objects:
+            figure_obj.create_figure()
 
-    def set_plot_objects(self):
+    def set_figure_objects(self):
         lines_iterable = enumerate(self.lines_object_groups)
-        self.plot_objects = [Plot(self, lines_object_group, index)
-                             for index, lines_object_group in lines_iterable]
+        self.figure_objects = [Figure(self, lines_object_group, index)
+                               for index, lines_object_group in lines_iterable]
 
-defaults.load(Plots)
+defaults.load(Figures)
 
-def plot(lines_objects, **kwargs):
-    plots_obj = Plots(lines_objects, **kwargs)
-    plots_obj.plot()
-    return plots_obj
+def create_figures(lines_objects, **kwargs):
+    figures_obj = Figures(lines_objects, **kwargs)
+    figures_obj.create_figures()
+    return figures_obj
