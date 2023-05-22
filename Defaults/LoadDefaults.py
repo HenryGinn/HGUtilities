@@ -20,7 +20,7 @@ class LoadDefaults():
         self.cls.defaults_path = os.path.join(parent_path, "Default Settings", defaults_file_name)
 
     def set_defaults(self):
-        self.cls.defaults = load_json(self.cls.defaults_path, suppress_errors=True)
+        self.cls.defaults = load_json(self.cls.defaults_path, ignore_empty_or_none=True)
         for parameter_name, parameter_value in self.cls.defaults.items():
             setattr(self.cls, parameter_name, parameter_value)
         

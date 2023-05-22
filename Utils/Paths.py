@@ -22,17 +22,11 @@ def make_folder_path(path):
         path = os.path.split(path)[0]
     make_file(path)
 
-def load_json(path, suppress_errors=False):
-    if suppress_errors:
-        return load_json_no_errors(path)
-    else:
-        return do_load_json(path)
-
-def load_json_no_errors(path):
-    try:
-        return do_load_json(path)
-    except:
-        return {}
+def load_json(path, ignore_empty_or_none=True):
+    if ignore_empty_or_none:
+        if not os.path.exists(path) or os.stat(path).st_size == 0:
+            return {}
+    return do_load_json(path)
 
 def do_load_json(path):
     with open(path, "r") as file:
