@@ -1,6 +1,7 @@
 import json
 
 from Utils.Paths import load_json
+from Utils.Paths import make_folder_path
 
 class ProcessKwargs():
 
@@ -52,5 +53,6 @@ class ProcessKwargs():
 
     def save_file_contents(self, original_file_contents, new_file_contents):
         if len(original_file_contents) != len(new_file_contents):
+            make_folder_path(self.obj.defaults_path)
             with open(self.obj.defaults_path, "w") as file:
                 json.dump(new_file_contents, file, indent=2)

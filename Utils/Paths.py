@@ -17,6 +17,11 @@ def make_folder(folder_path):
         make_folder(parent_folder_path)
         os.mkdir(folder_path)
 
+def make_folder_path(path):
+    if os.path.isfile(path):
+        path = os.path.split(path)[0]
+    make_file(path)
+
 def load_json(path, suppress_errors=False):
     if suppress_errors:
         return load_json_no_errors(path)

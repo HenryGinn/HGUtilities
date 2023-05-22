@@ -19,9 +19,9 @@ def get_line_obj(function, n):
     return line_obj
 
 lines_obj_1 = plotting.lines([get_line_obj(np.sin, 1)])
-lines_obj_2 = plotting.lines([plotting.line(["Blue", "Red", "Green"], [3, 2, 5])], plot_type="pie")
-lines_obj_3 = plotting.lines([plotting.line(["Blue", "Red", "Green"], [3, 2, 5])], plot_type="bar")
-lines_objects = [lines_obj_1, lines_obj_2, lines_obj_3]
+lines_obj_2 = plotting.lines([get_line_obj(np.cos, 1)])
+lines_obj_3 = plotting.lines([get_line_obj(np.sin, 3)])
+lines_obj_4 = plotting.lines([get_line_obj(np.cos, 3)])
+lines_objects = [lines_obj_1, lines_obj_2, lines_obj_3, lines_obj_4]
 
 plotting.create_figures(lines_objects)
-

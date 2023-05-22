@@ -2,10 +2,12 @@ import numpy as np
 from matplotlib.colors import hsv_to_rgb
 
 import Defaults as defaults
+from Plotting.DataTypes.Data import Data
 
-class Lines():
+class Lines(Data):
 
     def __init__(self, line_objects, **kwargs):
+        Data.__init__(self, **kwargs)
         defaults.kwargs(self, kwargs)
         self.line_objects = line_objects
         self.count = len(line_objects)

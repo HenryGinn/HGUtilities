@@ -19,8 +19,8 @@ A Plot object is responsible for each individual subplot. The subplot title, axi
 - Lines. This takes in a collection of Line objects. It also has an optional keyword argument called plot_type which controls whether the plot is made using plot, semilogy, semilogx, loglog, or errorbar. Each Line object corresponds to a single line on a subplot, and has a list of x_values and y_values. The Line object has attributes that control the appearance of the line and the line label.
 - Bars. This is similar to Lines, but it handles Bar objects which are similar to Line objects. The key distinction here is that the $x$ axis has qualitative data, and that prescribing the appearance of the bars is very different from lines. We note that a Bar object handles an entire series of data, and a Bars object handles a bar chart plot, so a single plot with two data series on it will be handled by one Bars object and two Bar objects.
 - Pie. Pie charts cannot show multiple data series so this subclass does not have a correspondence to Line or Bar. This takes in all the arguments that the matplotlib pie function takes in, and also any of the arguments from the parent class, Plot.
-- Colormesh.
-- Surface.
+- Colormesh. This shows a single data series with two dimensional input and one dimensional output. It takes in all arguments that the matplotlib pcolormesh function takes in and uses pcolormesh instead of pcolor.
+- Surface. This shows a single data series with two dimensional input and one dimensional output. It takes in all arguments that the matplotlib pcolormesh function takes in and uses pcolormesh instead of pcolor.
 
 ## Features
 

@@ -1,6 +1,6 @@
 import math
 
-class PlotShape():
+class GridDimensions():
 
     def __init__(self, count, aspect_ratio):
         self.count = count
@@ -110,3 +110,7 @@ class PlotShape():
             self.set_best_pair(1)
         else:
             self.set_best_pair(2)
+
+def get_grid_dimensions(count, aspect_ratio):
+    grid_dimensions_obj = GridDimensions(count, aspect_ratio)
+    return grid_dimensions_obj.dimensions
