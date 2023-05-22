@@ -10,6 +10,7 @@ obj = MyClass(my_parameter="Gav",
 import numpy as np
 
 import Plotting as plotting
+import matplotlib.pyplot as plt
 
 def get_line_obj(function, n):
     
@@ -18,7 +19,7 @@ def get_line_obj(function, n):
     line_obj = plotting.line(x_values, y_values)
     return line_obj
 
-lines_obj_1 = plotting.lines([get_line_obj(np.sin, 1)])
+lines_obj_1 = plotting.lines([get_line_obj(np.sin, 1)], plot_type="semilogx")
 lines_obj_2 = plotting.lines([get_line_obj(np.cos, 1)])
 lines_obj_3 = plotting.lines([get_line_obj(np.sin, 3)])
 lines_obj_4 = plotting.lines([get_line_obj(np.cos, 3)])

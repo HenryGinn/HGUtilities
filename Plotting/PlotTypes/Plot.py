@@ -12,6 +12,10 @@ class Plot():
         defaults.kwargs(self, kwargs)
 
     def create_plot(self):
+        self.plot_data()
+        self.set_plot_peripherals()
+
+    def set_plot_peripherals(self):
         self.set_title()
 
     def set_title(self):

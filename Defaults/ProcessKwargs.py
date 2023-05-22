@@ -46,9 +46,10 @@ class ProcessKwargs():
         self.save_file_contents(original_file_contents, new_file_contents)
 
     def add_key_words_to_file_contents(self, original_file_contents):
-        new_key_words_dict = {key_word: None
-                              for key_word in self.key_words_to_add}
-        new_file_contents = dict(**original_file_contents, **new_key_words_dict)
+        new_file_contents = dict(original_file_contents)
+        for key_word in self.key_words_to_add:
+            if key_word not in original_file_contents:
+                new_file_contents.update({key_word: None})
         return new_file_contents
 
     def save_file_contents(self, original_file_contents, new_file_contents):

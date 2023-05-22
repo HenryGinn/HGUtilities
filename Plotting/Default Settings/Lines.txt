@@ -1,8 +1,0 @@
-{
-  "plot_type": "plot",
-  "title": null,
-  "x_label": null,
-  "y_label": null,
-  "legend": false,
-  "legend_loc": 0
-}
