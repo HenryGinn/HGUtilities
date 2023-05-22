@@ -10,10 +10,8 @@ obj = MyClass(my_parameter="Gav",
 import numpy as np
 
 import Plotting as plotting
-import matplotlib.pyplot as plt
 
 def get_line_obj(function, n):
-    
     x_values = np.arange(0, 2*np.pi, 0.01)
     y_values = function(n * x_values)
     line_obj = plotting.line(x_values, y_values)
