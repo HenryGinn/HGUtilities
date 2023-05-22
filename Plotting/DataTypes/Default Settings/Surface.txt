@@ -1,0 +1,7 @@
+{
+  "plot_type": "plot_surface",
+  "projection": "3d",
+  "x_label": null,
+  "y_label": null,
+  "z_label": null
+}

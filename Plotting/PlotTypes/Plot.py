@@ -5,6 +5,10 @@ import Defaults as defaults
 
 class Plot():
 
+    @classmethod
+    def set_function_dict(cls):
+        pass
+    
     def __init__(self, figure_obj, ax, data_obj, **kwargs):
         self.figure_obj = figure_obj
         self.ax = ax

@@ -8,6 +8,19 @@ import Defaults as defaults
 from Plotting.Figures import create_figures
 from Plotting.DataTypes.Line import Line as line
 from Plotting.DataTypes.Lines import Lines as lines
+from Plotting.DataTypes.Bars import Bars as bars
+from Plotting.DataTypes.Bar import Bar as bar
+from Plotting.DataTypes.Pie import Pie as pie
+from Plotting.DataTypes.Surface import Surface as surface
+from Plotting.DataTypes.Colormap import Colormap as colormap
 from Plotting.PlotTypes.PlotLines import PlotLines
+from Plotting.PlotTypes.PlotBars import PlotBars
+from Plotting.PlotTypes.PlotPie import PlotPie
+from Plotting.PlotTypes.PlotSurface import PlotSurface
+from Plotting.PlotTypes.PlotColormap import PlotColormap
 
 PlotLines.set_function_dict()
+PlotBars.set_function_dict()
+PlotPie.set_function_dict()
+PlotSurface.set_function_dict()
+PlotColormap.set_function_dict()

@@ -6,13 +6,25 @@ from Plotting.PlotTypes.Plot import Plot
 
 class PlotSurface(Plot):
 
-    def __init__(self, figure_obj, ax, surface_obj, **kwargs):
-        Plot.__init__(self, figure_obj, ax, **kwargs)
-        self.surface_obj = surface_obj
+    @classmethod
+    def set_function_dict(cls):
+        cls.function_dict = {"plot_surface": cls.plot_regular}
+
+    def __init__(self, figure_obj, ax, data_obj, **kwargs):
+        Plot.__init__(self, figure_obj, ax, data_obj, **kwargs)
         defaults.kwargs(self, kwargs)
 
-    def set_title(self):
-        if self.surface_obj.title is not None:
-            self.ax.set_title(self.surface_obj.title)
+    def plot_data(self):
+        function_type = self.get_plot_function()
+        plot_function = getattr(self.ax, self.data_obj.plot_type)
+        function_type(self, plot_function, self.data_obj)
+
+    def get_plot_function(self):
+        plot_type = self.data_obj.plot_type
+        plot_function = self.function_dict[plot_type]
+        return plot_function
+
+    def plot_regular(self, plot_function, data_obj):
+        plot_function(data_obj.x_values, data_obj.y_values, data_obj.z_values)
 
 defaults.load(PlotSurface)

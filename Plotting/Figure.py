@@ -55,19 +55,17 @@ class Figure():
 
     def initialise_figure(self):
         self.create_axes()
-        self.flatten_axes()
         self.remove_extra_axes()
 
     def create_axes(self):
-        self.fig, self.axes = plt.subplots(nrows=self.rows,
-                                           ncols=self.columns,
-                                           constrained_layout=True)
-    
-    def flatten_axes(self):
-        if isinstance(self.axes, np.ndarray):
-            self.axes = self.axes.flatten()
-        else:
-            self.axes = [self.axes]
+        self.fig = plt.figure(constrained_layout=True)
+        self.axes = [self.get_axis(index, data_obj)
+                     for index, data_obj in enumerate(self.data_objects)]
+
+    def get_axis(self, index, data_obj):
+        axis = self.fig.add_subplot(self.rows, self.columns, index + 1,
+                                    projection=data_obj.projection)
+        return axis
     
     def remove_extra_axes(self):
         extra_axes_count = len(self.axes) - self.count
