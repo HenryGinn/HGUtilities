@@ -51,7 +51,7 @@ class Figure():
         self.create_plots()
         self.add_figure_peripherals()
         self.output_figure()
-        plt.close()
+        #plt.close()
 
     def initialise_figure(self):
         self.create_axes()
@@ -106,5 +106,14 @@ class Figure():
             plt.show()
         elif self.figures_obj.output == "Save":
             save_figure(self)
+
+    def get_frame_count(self):
+        frame_count = self.data_objects[0].get_frame_count()
+        return frame_count
+
+    def set_data_value(self, index):
+        for data_obj, data_values in zip(self.data_objects, self.all_data_values):
+            data_value = data_values[index]
+            data_obj.set_data_value(data_value)
 
 defaults.load(Figure)

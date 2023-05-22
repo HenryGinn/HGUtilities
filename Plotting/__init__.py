@@ -6,6 +6,7 @@ sys.path.append(package_path)
 import Defaults as defaults
 
 from Plotting.Figures import create_figures
+from Plotting.Figures import create_animations
 from Plotting.DataTypes.Line import Line as line
 from Plotting.DataTypes.Lines import Lines as lines
 from Plotting.DataTypes.Bars import Bars as bars

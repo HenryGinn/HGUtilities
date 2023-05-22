@@ -1,7 +1,11 @@
 import os
 import __main__
+import PIL
+import io
 
 import numpy as np
+from matplotlib.pyplot import savefig
+from matplotlib.pyplot import show
 
 import Defaults as defaults
 from Plotting.Figure import Figure
@@ -54,9 +58,47 @@ class Figures():
         self.figure_objects = [Figure(self, data_object_group, index)
                                for index, data_object_group in data_obj_iterable]
 
+    def create_animations(self):
+        self.process_data_objects()
+        self.process_output_mode()
+        self.animate_data_objects()
+
+    def animate_data_objects(self):
+        self.set_figure_objects()
+        for figure_obj in self.figure_objects:
+            self.animate_figure(figure_obj)
+
+    def animate_figure(self, figure_obj):
+        frame_count = figure_obj.get_frame_count()
+        figure_obj.all_data_values = self.get_all_data_values(figure_obj)
+        frames = [self.get_frame(figure_obj, index)
+                  for index in range(frame_count)]
+        frames[0].save("My animation.gif", loop=0, save_all=True,
+                       append_images=frames[1:], duration=80)
+
+    def get_all_data_values(self, figure_obj):
+        all_data_values = [data_obj.get_data_values()
+                           for data_obj in figure_obj.data_objects]
+        return all_data_values
+
+    def get_frame(self, figure_obj, index):
+        figure_obj.set_data_value(index)
+        figure_obj.create_figure()
+        buffer = io.BytesIO()
+        savefig(buffer, bbox_inches="tight")
+        buffer.seek(0)
+        image = PIL.Image.open(buffer)
+        return image
+
 defaults.load(Figures)
 
 def create_figures(data_objects, **kwargs):
     figures_obj = Figures(data_objects, **kwargs)
     figures_obj.create_figures()
+    return figures_obj
+
+def create_animations(data_objects, **kwargs):
+    figures_obj = Figures(data_objects, **kwargs)
+    figures_obj.output = None
+    figures_obj.create_animations()
     return figures_obj

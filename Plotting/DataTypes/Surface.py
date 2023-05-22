@@ -1,5 +1,4 @@
 import numpy as np
-from matplotlib.colors import hsv_to_rgb
 
 import Defaults as defaults
 from Plotting.DataTypes.Data import Data
@@ -15,5 +14,17 @@ class Surface(Data):
         self.x_values = x_values
         self.y_values = y_values
         self.z_values = z_values
+
+    def get_frame_count(self):
+        if len(self.z_values.shape) == 3:
+            return self.z_values.shape[0]
+        else:
+            raise ValueError("z_values needs 3 dimensions to animate")
+
+    def get_data_values(self):
+        return np.copy(self.z_values)
+
+    def set_data_value(self, data_value):
+        self.z_values = data_value
 
 defaults.load(Surface)
