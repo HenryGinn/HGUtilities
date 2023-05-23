@@ -2,12 +2,13 @@
   "order": 0,
   "radius_limit": 1,
   "time_limit": 1,
-  "radius_resolution": 10,
-  "theta_resolution": 10,
-  "time_resolution": 10,
+  "radius_resolution": 50,
+  "theta_resolution": 50,
+  "time_resolution": 20,
   "nodes": 1,
   "theta_plus": 2,
   "theta_minus": 1,
   "time_plus": 1,
-  "time_minus": 0
+  "time_minus": 0,
+  "cmap": null
 }

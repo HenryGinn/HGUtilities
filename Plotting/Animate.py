@@ -64,7 +64,7 @@ class Animate(Figures):
         return buffer
 
     def get_image(self, buffer, figure_obj):
-        savefig(buffer, bbox_inches="tight", dpi=figure_obj.fig.dpi)
+        savefig(buffer, dpi=figure_obj.fig.dpi)
         buffer.seek(0)
         image = PIL.Image.open(buffer)
         image = image.resize(figure_obj.figure_size_pixels)

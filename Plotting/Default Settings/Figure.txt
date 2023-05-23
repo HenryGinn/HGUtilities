@@ -1,5 +1,7 @@
 {
   "title": null,
   "dark": false,
-  "maximise": true
+  "maximise": true,
+  "dpi": null,
+  "time_resolution": null
 }

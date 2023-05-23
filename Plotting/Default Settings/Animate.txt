@@ -4,6 +4,10 @@
   "format": "gif",
   "duration": 1,
   "dark": null,
-  "maximise": false,
-  "figure_size": [12, 7.5]
+  "maximise": true,
+  "figure_size": [
+    9.61,
+    5.095
+  ],
+  "dpi": 500
 }
