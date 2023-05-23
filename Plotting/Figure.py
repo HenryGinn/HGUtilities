@@ -12,6 +12,7 @@ from Plotting.PlotTypes.PlotColormap import PlotColormap
 from Plotting.PlotTypes.PlotSurface import PlotSurface
 from Plotting.PlotUtils.GridDimensions import get_grid_dimensions
 from Plotting.PlotUtils.SaveFigure import save_figure
+from Plotting.PlotUtils.FigureSize import maximise_figure
 
 class Figure():
 
@@ -22,19 +23,25 @@ class Figure():
     of Line objects associated with it.
     """
 
-    def __init__(self, figures_obj, data_objects, plot_index):
+    @classmethod
+    def set_plot_classes(cls):
+        cls.plot_classes = {"Lines": PlotLines,
+                            "Bars": PlotBars,
+                            "Pie": PlotPie,
+                            "Colormap": PlotColormap,
+                            "Surface": PlotSurface}
+    
+    def __init__(self, figures_obj, data_objects, plot_index, **kwargs):
+        defaults.kwargs(self, kwargs)
         self.figures_obj = figures_obj
         self.plot_index = plot_index
         self.initialise_data_objects(data_objects)
         self.set_grid_size()
-        self.set_plot_classes()
+        self.process_light_or_dark()
 
-    def set_plot_classes(self):
-        self.plot_classes = {"Lines": PlotLines,
-                             "Bars": PlotBars,
-                             "Pie": PlotPie,
-                             "Colormap": PlotColormap,
-                             "Surface": PlotSurface}
+    def process_light_or_dark(self):
+        if self.dark:
+            plt.style.use('dark_background')
 
     def initialise_data_objects(self, data_objects):
         self.data_objects = data_objects
@@ -74,6 +81,7 @@ class Figure():
     def add_figure_peripherals(self):
         self.set_suptitle()
         self.set_universal_legend()
+        self.set_figure_size()
 
     def set_suptitle(self):
         if self.figures_obj.title is not None:
@@ -89,6 +97,24 @@ class Figure():
             ax.plot(1, 1, label=data_obj.label, color=data_obj.colour)
         ax.legend(loc="center", borderpad=2, labelspacing=1)
         ax.axis("off")
+
+    def set_figure_size(self):
+        self.update_size()
+        self.set_figure_size_pixels()
+
+    def update_size(self):
+        if self.maximise:
+            maximise_figure()
+        else:
+            self.set_figure_inches()
+
+    def set_figure_inches(self):
+        if self.figure_size is not None:
+            self.fig.set_size_inches(self.figure_size)
+
+    def set_figure_size_pixels(self):
+        self.figure_size_pixels = self.fig.get_size_inches()*self.fig.dpi
+        self.figure_size_pixels = [int(value) for value in self.figure_size_pixels]
 
     def create_plots(self):
         self.plot_objects = [self.create_plot_obj(ax, data_obj)

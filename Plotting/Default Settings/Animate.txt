@@ -1,0 +1,9 @@
+{
+  "loop": 0,
+  "animation_name": "My Animation",
+  "format": "gif",
+  "duration": 1,
+  "dark": null,
+  "maximise": false,
+  "figure_size": [12, 7.5]
+}

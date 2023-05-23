@@ -7,6 +7,7 @@ import Defaults as defaults
 
 from Plotting.PlotFunctions import create_figures
 from Plotting.PlotFunctions import create_animations
+from Plotting.Figure import Figure
 from Plotting.DataTypes.Line import Line as line
 from Plotting.DataTypes.Lines import Lines as lines
 from Plotting.DataTypes.Bars import Bars as bars
@@ -20,6 +21,7 @@ from Plotting.PlotTypes.PlotPie import PlotPie
 from Plotting.PlotTypes.PlotSurface import PlotSurface
 from Plotting.PlotTypes.PlotColormap import PlotColormap
 
+Figure.set_plot_classes()
 PlotLines.set_function_dict()
 PlotBars.set_function_dict()
 PlotPie.set_function_dict()

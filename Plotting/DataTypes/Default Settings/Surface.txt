@@ -4,5 +4,6 @@
   "x_label": null,
   "y_label": null,
   "z_label": null,
-  "z_limits": null
+  "z_limits": null,
+  "cmap": "inferno"
 }

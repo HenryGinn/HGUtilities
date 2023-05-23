@@ -19,6 +19,7 @@ class PlotSurface(Plot):
         plot_function = getattr(self.ax, self.data_obj.plot_type)
         function_type(self, plot_function, self.data_obj)
         self.set_z_limits()
+        self.set_axes()
 
     def get_plot_function(self):
         plot_type = self.data_obj.plot_type
@@ -26,11 +27,16 @@ class PlotSurface(Plot):
         return plot_function
 
     def plot_regular(self, plot_function, data_obj):
-        plot_function(data_obj.x_values, data_obj.y_values, data_obj.z_values)
+        plot_function(data_obj.x_values, data_obj.y_values, data_obj.z_values,
+                      cmap=data_obj.cmap, vmin=data_obj.z_limits[0], vmax=data_obj.z_limits[1])
 
     def set_z_limits(self):
         if self.data_obj.z_limits is not None:
             bottom, top = self.data_obj.z_limits
             self.ax.set_zlim(bottom=bottom, top=top)
+
+    def set_axes(self):
+        if not self.data_obj.axes:
+            self.ax.axis("off")
 
 defaults.load(PlotSurface)
