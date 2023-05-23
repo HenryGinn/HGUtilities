@@ -51,7 +51,6 @@ class Figure():
         self.create_plots()
         self.add_figure_peripherals()
         self.output_figure()
-        #plt.close()
 
     def initialise_figure(self):
         self.create_axes()
@@ -103,9 +102,17 @@ class Figure():
     
     def output_figure(self):
         if self.figures_obj.output == "Show":
-            plt.show()
+            self.show_figure()
         elif self.figures_obj.output == "Save":
             save_figure(self)
+
+    def show_figure(self):
+        plt.show()
+        plt.close()
+
+    def set_animation_axis_limits(self):
+        for data_obj in self.data_objects:
+            data_obj.set_animation_axis_limits()
 
     def get_frame_count(self):
         frame_count = self.data_objects[0].get_frame_count()

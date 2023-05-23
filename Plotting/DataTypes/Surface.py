@@ -15,6 +15,11 @@ class Surface(Data):
         self.y_values = y_values
         self.z_values = z_values
 
+    def set_animation_axis_limits(self):
+        max_z = np.max(self.z_values)
+        min_z = np.min(self.z_values)
+        self.z_limits = [min_z, max_z]
+
     def get_frame_count(self):
         if len(self.z_values.shape) == 3:
             return self.z_values.shape[0]

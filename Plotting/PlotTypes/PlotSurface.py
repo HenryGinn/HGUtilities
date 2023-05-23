@@ -18,6 +18,7 @@ class PlotSurface(Plot):
         function_type = self.get_plot_function()
         plot_function = getattr(self.ax, self.data_obj.plot_type)
         function_type(self, plot_function, self.data_obj)
+        self.set_z_limits()
 
     def get_plot_function(self):
         plot_type = self.data_obj.plot_type
@@ -26,5 +27,10 @@ class PlotSurface(Plot):
 
     def plot_regular(self, plot_function, data_obj):
         plot_function(data_obj.x_values, data_obj.y_values, data_obj.z_values)
+
+    def set_z_limits(self):
+        if self.data_obj.z_limits is not None:
+            bottom, top = self.data_obj.z_limits
+            self.ax.set_zlim(bottom=bottom, top=top)
 
 defaults.load(PlotSurface)

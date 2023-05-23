@@ -60,8 +60,17 @@ class Figures():
 
     def create_animations(self):
         self.process_data_objects()
-        self.process_output_mode()
+        self.set_figure_objects()
+        self.prepare_animation_settings()
         self.animate_data_objects()
+
+    def prepare_animation_settings(self):
+        self.output = None
+        self.set_animation_axis_limits()
+
+    def set_animation_axis_limits(self):
+        for figure_obj in self.figure_objects:
+            figure_obj.set_animation_axis_limits()
 
     def animate_data_objects(self):
         self.set_figure_objects()
@@ -70,16 +79,15 @@ class Figures():
 
     def animate_figure(self, figure_obj):
         frame_count = figure_obj.get_frame_count()
-        figure_obj.all_data_values = self.get_all_data_values(figure_obj)
+        self.set_all_data_values(figure_obj)
         frames = [self.get_frame(figure_obj, index)
                   for index in range(frame_count)]
         frames[0].save("My animation.gif", loop=0, save_all=True,
                        append_images=frames[1:], duration=80)
 
-    def get_all_data_values(self, figure_obj):
-        all_data_values = [data_obj.get_data_values()
-                           for data_obj in figure_obj.data_objects]
-        return all_data_values
+    def set_all_data_values(self, figure_obj):
+        figure_obj.all_data_values = [data_obj.get_data_values()
+                                      for data_obj in figure_obj.data_objects]
 
     def get_frame(self, figure_obj, index):
         figure_obj.set_data_value(index)
@@ -91,14 +99,3 @@ class Figures():
         return image
 
 defaults.load(Figures)
-
-def create_figures(data_objects, **kwargs):
-    figures_obj = Figures(data_objects, **kwargs)
-    figures_obj.create_figures()
-    return figures_obj
-
-def create_animations(data_objects, **kwargs):
-    figures_obj = Figures(data_objects, **kwargs)
-    figures_obj.output = None
-    figures_obj.create_animations()
-    return figures_obj
