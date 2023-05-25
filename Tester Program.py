@@ -71,10 +71,37 @@ class VibratingPlate():
         self.z_values = np.real(self.radius_theta_product * time_values)
 
 defaults.load(VibratingPlate)
-
+"""
 vibrating_plate_obj = VibratingPlate()
 surface_objects = [vibrating_plate_obj.get_surface_obj(nodes=nodes, order=order,
                                                        cmap="spring", radius_resolution=20,
                                                        theta_resolution=20, time_resolution=10)
                    for nodes in range(1, 4) for order in range(5)]
 plotting.create_animations(surface_objects, dark=True, dpi=200, maximise=True)
+"""
+
+# Importing
+import numpy as np
+#import hgutils.plotting
+
+def get_lines_obj(n):
+    line_obj = get_line_obj(n)
+    title = f"Sin({n}x)"
+    x_label = "My x axis label"
+    y_label = "My y axis label"
+    lines_obj = plotting.lines(line_obj, title=title,
+                               x_label=x_label, y_label=y_label)
+    return lines_obj
+
+def get_line_obj(n):
+    y_values = np.sin(n*x_values)
+    line_obj = plotting.line(x_values, y_values)
+    return line_obj
+
+# Creation of lines objects
+x_values = np.arange(0, 2*np.pi, 0.01)
+x_coefficients = list(range(1, 13))
+lines_objects = [get_lines_obj(n) for n in x_coefficients]
+
+# Creation of figures
+plotting.create_figures(lines_objects, subplots=6)

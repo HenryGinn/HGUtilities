@@ -106,31 +106,19 @@ class Figure():
     def update_size(self):
         if self.maximise:
             self.maximise_figure()
-        else:
-            self.set_figure_inches()
+        self.set_figure_inches()
 
     def maximise_figure(self):
         maximise_figure()
         monitor = get_monitors()[0]
         figure_size = [monitor.width_mm / 25.4, monitor.height_mm / 25.4]
-        self.fig.set_size_inches(figure_size)
+        self.figure_size = figure_size
 
     def set_figure_inches(self):
         if self.figure_size is not None:
             self.fig.set_size_inches(self.figure_size)
 
     def set_figure_size_pixels(self):
-        if self.maximise:
-            self.set_figure_size_pixels_maximise()
-        else:
-            self.set_figure_size_pixels_unmaximise()
-
-    def set_figure_size_pixels_maximise(self):
-        window = plt.get_current_fig_manager().window
-        self.figure_size_pixels = list(window.wm_maxsize())
-        self.figure_size_pixels[0] //= 2
-
-    def set_figure_size_pixels_unmaximise(self):
         self.figure_size_pixels = self.fig.get_size_inches()*self.fig.dpi
         self.figure_size_pixels = [int(value) for value in self.figure_size_pixels]
 

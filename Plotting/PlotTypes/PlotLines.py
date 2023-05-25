@@ -21,6 +21,11 @@ class PlotLines(Plot):
         defaults.kwargs(self, kwargs)
 
     def plot_data(self):
+        self.plot_lines()
+        self.add_plot_labels()
+        self.add_legend()
+
+    def plot_lines(self):
         function_type = self.get_plot_function()
         plot_function = getattr(self.ax, self.lines_obj.plot_type)
         for line_obj in self.lines_obj.line_objects:
@@ -87,5 +92,27 @@ class PlotLines(Plot):
                       vmax=line_obj.vmax, alpha=line_obj.alpha,
                       linewidths=line_obj.linewidths, edgecolors=line_obj.edgecolors,
                       plotnonfinite=line_obj.plotnonfinite)
+
+    def add_plot_labels(self):
+        self.add_title()
+        self.add_x_label()
+        self.add_y_label()
+
+    def add_title(self):
+        if self.lines_obj.title is not None:
+            self.ax.set_title(self.lines_obj.title)
+
+    def add_x_label(self):
+        if self.lines_obj.x_label is not None:
+            self.ax.set_xlabel(self.lines_obj.x_label)
+
+    def add_y_label(self):
+        if self.lines_obj.y_label is not None:
+            self.ax.set_ylabel(self.lines_obj.y_label)
+
+    def add_legend(self):
+        if not self.figures_obj.universal_legend:
+            if self.lines_obj.legend:
+                self.ax.legend(loc=self.lines_obj.loc)
 
 defaults.load(PlotLines)

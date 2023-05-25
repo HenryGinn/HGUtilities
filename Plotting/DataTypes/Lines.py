@@ -3,14 +3,34 @@ from matplotlib.colors import hsv_to_rgb
 
 import Defaults as defaults
 from Plotting.DataTypes.Data import Data
+from Plotting.DataTypes.Line import Line
 
 class Lines(Data):
 
     def __init__(self, line_objects, **kwargs):
         Data.__init__(self, **kwargs)
         defaults.kwargs(self, kwargs)
-        self.line_objects = line_objects
-        self.count = len(line_objects)
+        self.set_line_objects(line_objects)
+        self.count = len(self.line_objects)
+
+    def set_line_objects(self, line_objects):
+        if isinstance(line_objects, Line):
+            self.line_objects = [line_objects]
+        else:
+            self.set_line_objects_multiple(line_objects)
+
+    def set_line_objects_multiple(self, line_objects):
+        if np.all([isinstance(line_obj, Line)
+                   for line_obj in line_objects]):
+            self.line_objects = list(line_objects)
+        else:
+            self.bad_data_objects_exception()
+
+    def bad_data_objects_exception(self):
+        message = ("When creating a lines object you must pass "
+                   "in an instance of Line or an iterable of "
+                   "instances of Line")
+        raise TypeError(message)
 
     def set_rainbow_lines(self, saturation=1, value=1):
         self.set_colours(saturation, value)

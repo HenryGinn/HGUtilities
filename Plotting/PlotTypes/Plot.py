@@ -11,6 +11,7 @@ class Plot():
     
     def __init__(self, figure_obj, ax, data_obj, **kwargs):
         self.figure_obj = figure_obj
+        self.figures_obj = figure_obj.figures_obj
         self.ax = ax
         self.data_obj = data_obj
         defaults.kwargs(self, kwargs)

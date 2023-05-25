@@ -1,8 +1,8 @@
 {
   "aspect_ratio": 1.7,
-  "universal_legend": false,
   "title": null,
   "subplots": null,
+  "universal_legend": false,
   "output": "Show",
   "path": null,
   "dpi": "figure",
@@ -12,5 +12,6 @@
   "pad_inches": 0.1,
   "facecolor": "auto",
   "edgecolor": "auto",
-  "backend": null
+  "backend": null,
+  "maximise": null
 }

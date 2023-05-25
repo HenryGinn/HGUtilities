@@ -3,5 +3,6 @@
   "dark": false,
   "maximise": true,
   "dpi": null,
-  "time_resolution": null
+  "figure_size": null,
+  "subplots": null
 }

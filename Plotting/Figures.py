@@ -5,6 +5,7 @@ import numpy as np
 
 import Defaults as defaults
 from Plotting.Figure import Figure
+from Plotting.DataTypes.Data import Data
 from Utils.Groups import get_group_indexes
 from Utils.Groups import get_group_size
 from Utils.Paths import make_folder
@@ -21,8 +22,29 @@ class Figures():
 
     def __init__(self, data_objects, **kwargs):
         defaults.kwargs(self, **kwargs)
-        self.data_objects = np.array(data_objects)
+        self.set_data_objects(data_objects)
         self.data_obj_count = self.data_objects.size
+
+    def set_data_objects(self, data_objects):
+        if isinstance(data_objects, Data):
+            self.data_objects = np.array([data_objects])
+        else:
+            self.set_data_objects_multiple(data_objects)
+
+    def set_data_objects_multiple(self, data_objects):
+        if np.all([isinstance(data_obj, Data)
+                   for data_obj in data_objects]):
+            self.data_objects = np.array(data_objects)
+        else:
+            self.bad_data_objects_exception()
+
+    def bad_data_objects_exception(self):
+        message = ("When creating figure objects you must pass "
+                   "in an instance of Data or an iterable of "
+                   "instances of Data. If you are passing in "
+                   "Line/Bar objects, you need to create a "
+                   "Lines/Bars object to pass in instead")
+        raise TypeError(message)
     
     def create_figures(self, **kwargs):
         self.process_data_objects()
