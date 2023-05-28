@@ -26,15 +26,15 @@ class PlotLines(Plot):
         self.add_legend()
 
     def plot_lines(self):
-        function_type = self.get_plot_function()
+        plot_type_function = self.get_plot_type_function()
         plot_function = getattr(self.ax, self.lines_obj.plot_type)
         for line_obj in self.lines_obj.line_objects:
-            function_type(self, plot_function, line_obj)
+            plot_type_function(self, plot_function, line_obj)
 
-    def get_plot_function(self):
+    def get_plot_type_function(self):
         plot_type = self.lines_obj.plot_type
-        plot_function = self.function_dict[plot_type]
-        return plot_function
+        plot_type_function = self.function_dict[plot_type]
+        return plot_type_function
 
     def plot_regular(self, plot_function, line_obj):
         plot_function(line_obj.x_values, line_obj.y_values,

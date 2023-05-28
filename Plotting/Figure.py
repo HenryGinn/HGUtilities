@@ -18,12 +18,18 @@ from Plotting.PlotUtils.FigureSize import maximise_figure
 class Figure():
 
     """
-    An instance of Plot will be a single figure.
-    This figure can have multiple subplots, and corresponding to
-    each subplot is a Lines object. A Lines object has a collection
-    of Line objects associated with it.
-    """
+    Responsible for arranging subplots on a single figure.
+    To control the shape of the grid, pass in a value for
+    aspect_ratio when creating Figures objects. The number
+    of subplots on a figure is controlled by the Figures object.
 
+    Figure.defaults shows a list of optional kwargs.
+
+    For further documentation see the following:
+    https://github.com/HenryGinn/HGUtils
+    https://github.com/HenryGinn/HGUtils/tree/main/Plotting
+    """
+    
     @classmethod
     def set_plot_classes(cls):
         cls.plot_classes = {"Lines": PlotLines,

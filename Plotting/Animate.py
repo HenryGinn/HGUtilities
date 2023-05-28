@@ -9,6 +9,24 @@ import Defaults as defaults
 
 class Animate(Figures):
 
+    """
+    A subclass of Figures, this is responsible for creating
+    short animations.
+
+    create_animations is an interface for this class.
+
+    Takes in a list of Data objects. These are just like
+    regular Data objects, but the dependent variable should
+    instead be an iterable where each element gives the values
+    for a single frame.
+
+    Animate.defaults shows a list of optional kwargs.
+
+    For further documentation see the following:
+    https://github.com/HenryGinn/HGUtils
+    https://github.com/HenryGinn/HGUtils/tree/main/Plotting
+    """
+    
     def __init__(self, data_objects, **kwargs):
         Figures.__init__(self, data_objects, **kwargs)
         defaults.kwargs(self, kwargs)

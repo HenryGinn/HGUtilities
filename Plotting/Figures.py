@@ -13,11 +13,21 @@ from Utils.Paths import make_folder
 class Figures():
 
     """
-    An instance of Plots will represent several figures that are
-    all associated with one list of objects. When wanting to plot
-    multiple things, they might not all fit on one figure. Plots
-    organises how they are put onto multiple figures, and each of
-    those figures is handled as a single Plot object.
+    Responsible for distributing the subplots among figures,
+    and controlling what happens to the figures, such as whether
+    they are to be shown, saved, or nothing. The number of
+    subplots on each plot is controlled by the subplots key-word,
+    where the default is None (plot all given Data objects).
+
+    create_figures is an interface for this class.
+
+    Takes in a list of Data objects.
+
+    Figures.defaults shows a list of optional kwargs.
+
+    For further documentation see the following:
+    https://github.com/HenryGinn/HGUtils
+    https://github.com/HenryGinn/HGUtils/tree/main/Plotting
     """
 
     def __init__(self, data_objects, **kwargs):
