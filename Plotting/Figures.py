@@ -12,24 +12,6 @@ from Utils.Paths import make_folder
 
 class Figures():
 
-    """
-    Responsible for distributing the subplots among figures,
-    and controlling what happens to the figures, such as whether
-    they are to be shown, saved, or nothing. The number of
-    subplots on each plot is controlled by the subplots key-word,
-    where the default is None (plot all given Data objects).
-
-    create_figures is an interface for this class.
-
-    Takes in a list of Data objects.
-
-    Figures.defaults shows a list of optional kwargs.
-
-    For further documentation see the following:
-    https://github.com/HenryGinn/HGUtils
-    https://github.com/HenryGinn/HGUtils/tree/main/Plotting
-    """
-
     def __init__(self, data_objects, **kwargs):
         defaults.kwargs(self, **kwargs)
         self.set_data_objects(data_objects)
@@ -85,6 +67,5 @@ class Figures():
         data_obj_iterable = enumerate(self.data_object_groups)
         self.figure_objects = [Figure(self, data_object_group, index, **kwargs)
                                for index, data_object_group in data_obj_iterable]
-
 
 defaults.load(Figures)

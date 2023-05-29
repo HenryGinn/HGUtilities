@@ -1,5 +1,8 @@
 import Plotting as plotting
 
+from Plotting.Animate import Animate
+help(Animate)
+
 # Importing
 import numpy as np
 #import hgutils.plotting
@@ -17,8 +20,6 @@ title = "Bar Chart Example"
 bar_objects = [bar_obj_1, bar_obj_2]
 bars_obj = plotting.bars(bar_objects, title=title)
 
-help(plotting)
-
 # Creating pie object
 values = [4, 2, 7]
 labels = ["Red", "Green", "Blue"]
@@ -31,3 +32,4 @@ data_objects = [pie_obj]
 
 # Creation of figures
 #plotting.create_figures(data_objects)
+

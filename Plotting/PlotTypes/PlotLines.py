@@ -116,3 +116,4 @@ class PlotLines(Plot):
                 self.ax.legend(loc=self.lines_obj.loc)
 
 defaults.load(PlotLines)
+PlotLines.__doc__ = "This is some text"
