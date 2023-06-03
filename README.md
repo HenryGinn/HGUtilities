@@ -1,4 +1,4 @@
-# HGUtilities
+# HGUtils
 This is a collection of useful tools I use regularly. There are three parts to this package:
 
 - Defaults: manages settings for classes that can be controlled easily from an interface.

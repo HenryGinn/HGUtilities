@@ -1,8 +1,5 @@
 import Plotting as plotting
 
-from Plotting.Animate import Animate
-help(Animate)
-
 # Importing
 import numpy as np
 #import hgutils.plotting
@@ -25,11 +22,19 @@ values = [4, 2, 7]
 labels = ["Red", "Green", "Blue"]
 title = "Pie Chart Example"
 pie_obj = plotting.pie(values, labels, title=title,
-                       colors=labels)
+                       color=labels)
 
-#data_objects = [bars_obj], pie_obj, surface_obj, colormap_obj]
-data_objects = [pie_obj]
+# Creating surface object
+x_values = np.arange(0, 10, 0.01)
+y_values = np.arange(0, 10, 0.01)
+x_mesh, y_mesh = np.meshgrid(x_values, y_values)
+z_mesh = np.cos(x_mesh) + np.cos(y_mesh)
+title = "Surface Plot Example"
+surface_obj = plotting.surface(x_mesh, y_mesh, z_mesh,
+                               title=title)
+
+data_objects = [bars_obj, pie_obj, surface_obj]#, colormap_obj]
 
 # Creation of figures
-#plotting.create_figures(data_objects)
+plotting.create_figures(data_objects)
 

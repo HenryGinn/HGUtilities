@@ -1,4 +1,4 @@
-This is a module is an interface for matplotlib and is designed to make
+This package is an interface for matplotlib and is designed to make
 creation and processing of figures with subplots easier. The data and
 settings are specified, and they are arranged on figures where the user
 can control the maximum number of subplots on each figure and prescribe
@@ -7,10 +7,10 @@ will be spread over multiple figures. The number of figures is no more
 than the ceiling of the total number of plots divided by the maximum
 number of plots per figure.
 
-While this module offers a lot of flexibility, it is mainly intended for
+While this package offers a lot of flexibility, it is mainly intended for
 convenient production of figures. For publication quality plots, it is
 recommended that the full flexibility of matplotlib or other plotting
-packages should be used instead. This module performs best for purposes
+packages should be used instead. This package performs best for purposes
 such as analysing data and making powerpoints to be shared among
 colleages and students.
 

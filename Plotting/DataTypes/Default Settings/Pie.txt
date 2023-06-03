@@ -1,4 +1,3 @@
 {
-  "color": null,
-  "colors": null
+  "color": null
 }

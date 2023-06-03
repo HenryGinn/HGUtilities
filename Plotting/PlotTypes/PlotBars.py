@@ -71,13 +71,11 @@ class PlotBars(Plot):
                     width=self.bar_width, bottom=bars_obj.bottom,
                     color=bar_obj.color, edgecolor=bar_obj.edgecolor,
                     linewidth=bar_obj.linewidth, tick_label=bar_obj.tick_label,
-                    label=bar_obj.label, xerr=bar_obj.x_err,
-                    y_err=bar_obj.y_err, ecolor=bar_obj.ecolor,
-                    capsize=bar_obj.capsize, error_kw=bar_obj.error_kw,
+                    label=bar_obj.label, xerr=bar_obj.xerr,
+                    yerr=bar_obj.yerr, ecolor=bar_obj.ecolor,
+                    capsize=bar_obj.capsize,
                     log=bars_obj.log, agg_filter=bar_obj.agg_filter,
                     alpha=bar_obj.alpha, angle=bar_obj.angle,
-                    animated=bars_obj.animated, antialiased=bar_obj.antialiased,
-                    bounds=bars_obj.bounds, capstyle=bar_obj.capstyle,
-                    )
+                    animated=bars_obj.animated, antialiased=bar_obj.antialiased)
 
 defaults.load(PlotBars)

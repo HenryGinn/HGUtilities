@@ -7,5 +7,10 @@
   "xerr": null,
   "yerr": null,
   "ecolor": null,
-  "capsize": null
+  "capsize": null,
+  "agg_filter": null,
+  "alpha": null,
+  "angle": 0,
+  "antialiased": null,
+  "capstyle": null
 }

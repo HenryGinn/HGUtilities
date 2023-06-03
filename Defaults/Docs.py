@@ -6,17 +6,18 @@ import sys
 class Docs():
 
     def __init__(self):
-        self.extract_module()
-        self.process_module_directory()
+        self.extract_package()
+        self.process_package_directory()
+        self.add_package_docs()
 
-    def extract_module(self):
+    def extract_package(self):
         file_name = traceback.extract_stack()[-4].filename
-        self.module_path = os.path.split(file_name)[0]
-        self.module_name = os.path.split(self.module_path)[1]
-        self.module = sys.modules[self.module_name]
+        self.package_path = os.path.split(file_name)[0]
+        self.package_name = os.path.split(self.package_path)[1]
+        self.package = sys.modules[self.package_name]
 
-    def process_module_directory(self):
-        for name, obj in inspect.getmembers(self.module):
+    def process_package_directory(self):
+        for name, obj in inspect.getmembers(self.package):
             if not inspect.ismodule(obj):
                 if hasattr(obj, "__module__"):
                     self.filter_non_module_objects(obj)
@@ -24,12 +25,12 @@ class Docs():
     def filter_non_module_objects(self, obj):
         object_module = inspect.getmodule(obj)
         common_path = self.get_common_path(object_module)
-        if common_path == self.module_path:
+        if common_path == self.package_path:
             self.set_object_docs(obj)
 
     def get_common_path(self, object_module):
         object_module_path = object_module.__file__
-        common_path = os.path.commonpath((self.module_path, object_module_path))
+        common_path = os.path.commonpath((self.package_path, object_module_path))
         return common_path
 
     def set_object_docs(self, obj):
@@ -71,6 +72,16 @@ class Docs():
         return ("No documentation exists for this object.\n"
                 "It was expected to be found at the following location:\n"
                 f"{doc_path}\n")
+
+    def add_package_docs(self):
+        doc_path = self.get_package_doc_path()
+        doc_string = self.get_doc_string_from_path(doc_path)
+        self.package.__doc__ = doc_string
+
+    def get_package_doc_path(self):
+        name = self.package.__name__
+        doc_path = self.get_doc_path_from_path_data(self.package_path, name)
+        return doc_path
 
 def docs():
     docs_obj = Docs()
