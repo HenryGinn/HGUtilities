@@ -33,7 +33,16 @@ title = "Surface Plot Example"
 surface_obj = plotting.surface(x_mesh, y_mesh, z_mesh,
                                title=title)
 
-data_objects = [bars_obj, pie_obj, surface_obj]#, colormap_obj]
+# Creating surface object
+x_values = np.arange(0, 10, 0.01)
+y_values = np.arange(0, 10, 0.01)
+x_mesh, y_mesh = np.meshgrid(x_values, y_values)
+z_mesh = np.cos(x_mesh) + np.cos(y_mesh)
+title = "Colorplot Example"
+colormap_obj = plotting.colormap(x_mesh, y_mesh, z_mesh,
+                                   title=title)
+
+data_objects = [bars_obj, pie_obj, surface_obj, colormap_obj]
 
 # Creation of figures
 plotting.create_figures(data_objects)
