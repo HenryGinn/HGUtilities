@@ -16,21 +16,39 @@ class Plot():
         self.ax = ax
         self.data_obj = data_obj
         defaults.kwargs(self, kwargs)
+        self.set_kwargs()
+
+    def set_kwargs(self):
+        self.inherit_kwargs()
         self.set_font_kwargs()
 
+    def inherit_kwargs(self):
+        attributes = ["title_fontname", "title_fontsize",
+                      "title_color", "title_verticalalignment",
+                      "title_horizontalalignment", "title_y",
+                      "title_pad", "title_loc",
+                      "axis_fontname", "axis_fontsize",
+                      "axis_color", "axis_labelpad", "axis_loc",
+                      "x_axis_rotation", "y_axis_rotation", "z_axis_rotation"]
+        defaults.inherit(self.data_obj, self.figure_obj, attributes)
+        
     def set_font_kwargs(self):
-        self.set_title_font_kwargs()
-        self.set_axis_font_kwargs()
+        self.set_title_fontdict()
+        self.set_axis_fontdict()
 
-    def set_title_font_kwargs(self):
+    def set_title_fontdict(self):
         kwargs = {"fontname": self.data_obj.title_fontname,
-                  "size": self.data_obj.title_fontsize}
-        self.title_font_kwargs = remove_none_values(kwargs)
+                  "fontsize": self.data_obj.title_fontsize,
+                  "color": self.data_obj.title_color,
+                  "verticalalignment": self.data_obj.title_verticalalignment,
+                  "horizontalalignment": self.data_obj.title_horizontalalignment}
+        self.title_fontdict = remove_none_values(kwargs)
 
-    def set_axis_font_kwargs(self):
+    def set_axis_fontdict(self):
         kwargs = {"fontname": self.data_obj.axis_fontname,
-                  "size": self.data_obj.axis_fontsize}
-        self.axis_font_kwargs = remove_none_values(kwargs)
+                  "fontsize": self.data_obj.axis_fontsize,
+                  "color": self.data_obj.axis_color}
+        self.axis_fontdict = remove_none_values(kwargs)
 
     def set_figure_obj(self, figure_obj):
         self.figure_obj = figure_obj
@@ -44,13 +62,14 @@ class Plot():
 
     def set_title(self):
         if self.data_obj.title is not None:
-            self.ax.set_title(self.data_obj.title,
-                              **self.title_font_kwargs)
-
+            self.ax.set_title(self.data_obj.title, **self.title_fontdict,
+                              loc=self.data_obj.title_loc, y=self.data_obj.title_y,
+                              pad=self.data_obj.title_pad)
+    
     def add_legend(self):
         if not self.figures_obj.universal_legend:
             if self.data_obj.legend:
-                self.ax.legend(loc=self.data_obj.loc)
+                self.ax.legend(loc=self.data_obj.legend_loc)
 
     def add_axis_labels(self):
         pass
@@ -58,16 +77,19 @@ class Plot():
     def add_x_label(self):
         if self.data_obj.x_label is not None:
             self.ax.set_xlabel(self.data_obj.x_label,
-                               **self.axis_font_kwargs)
+                               **self.axis_font_kwargs,
+                               rot=self.data_obj.x_label_rotation)
 
     def add_y_label(self):
         if self.data_obj.y_label is not None:
             self.ax.set_ylabel(self.data_obj.y_label,
-                               **self.axis_font_kwargs)
+                               **self.axis_font_kwargs,
+                               rot=self.data_obj.z_label_rotation)
 
     def add_z_label(self):
         if self.data_obj.z_label is not None:
             self.ax.set_zlabel(self.data_obj.z_label,
-                               **self.axis_font_kwargs)
+                               **self.axis_font_kwargs,
+                               rot=self.data_obj.z_label_rotation)
 
 defaults.load(Plot)

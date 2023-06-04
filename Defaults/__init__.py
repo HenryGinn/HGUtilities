@@ -18,4 +18,5 @@ sys.path.append(package_path)
 
 from Defaults.LoadDefaults import LoadDefaults as load
 from Defaults.ProcessKwargs import ProcessKwargs as kwargs
+from Defaults.Inherit import inherit
 from Defaults.Docs import docs

@@ -11,3 +11,4 @@ For further documentation see the following:
 Data and Figures classes
 https://github.com/HenryGinn/HGUtils
 https://github.com/HenryGinn/HGUtils/tree/main/Plotting
+https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pie.html

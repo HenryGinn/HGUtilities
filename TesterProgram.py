@@ -2,7 +2,7 @@ import Plotting as plotting
 
 # Importing
 import numpy as np
-#import hgutils.plotting
+#import hgutils.Plotting
 
 # Creating bars object
 x_values_1 = ["Red", "Green", "Blue"]
@@ -41,4 +41,3 @@ colormap_obj = plotting.Colorplot(x_mesh, y_mesh, z_mesh,
 # Creation of figures
 data_objects = [bars_obj, pie_obj, surface_obj, colormap_obj]
 plotting.create_figures(data_objects)
-

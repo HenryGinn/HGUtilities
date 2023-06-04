@@ -10,6 +10,7 @@ This is a collection of useful tools I use regularly. There are three parts to t
 1. [Defaults](#defaults)
 1. [Plotting](#plotting)
 1. [Utils](#utils)
+1. [Development](#development)
 
 ## Defaults
 
@@ -59,3 +60,14 @@ It also provides other functions such as easily applying a rainbow pattern to th
 ## Utils
 
 The aim of this is to improve quality of coding life by implementing some common functions. For example when reading a json file, you cannot simply open the file as load the json, you must first check whether it is empty. Such annoyances are handled by the functions in this part of the package. We split the utilities into several categories to make it easier to organise them. The functions implemented here are tailored to my personal needs, and they may not have the desired functionality for a general use case. Backwards compatibility is not guaranteed.
+
+## Development
+
+### Features and functionality to add in V1.1
+
+- automatic prefixing to axes
+- more control over subplot placement
+- automatic paragraph organisation for documentation
+- better distribution of subplots over multiple figures
+- control over tick labels
+- horizontal bar charts

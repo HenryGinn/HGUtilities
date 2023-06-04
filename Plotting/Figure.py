@@ -54,9 +54,14 @@ class Figure():
         self.output_figure()
 
     def initialise_figure(self):
-        self.fig = plt.figure(constrained_layout=True, dpi=self.dpi)
+        self.set_figure()
         self.create_axes()
         self.remove_extra_axes()
+
+    def set_figure(self):
+        self.fig = plt.figure(constrained_layout=True, dpi=self.dpi)
+        self.fig.set_constrained_layout_pads(w_pad=self.w_pad, h_pad=self.h_pad,
+                                             hspace=self.hspace, wspace=self.wspace)
 
     def create_axes(self):
         self.axes = [self.get_axis(index, data_obj)
