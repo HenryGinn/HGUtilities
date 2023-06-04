@@ -14,7 +14,14 @@ class PlotColorplot(Plot):
 
     def plot_data(self):
         colorplot_obj = self.colorplot_obj
-        self.ax.pcolormesh(colorplot_obj.x_mesh, colorplot_obj.y_mesh,
-                           colorplot_obj.z_mesh)
+        x_and_y = self.get_x_and_y()
+        self.ax.pcolormesh(*x_and_y, colorplot_obj.z_mesh)
+
+    def get_x_and_y(self):
+        if ((self.colorplot_obj.x is not None) and
+            (self.colorplot_obj.y is not None)):
+            return (self.colorplot_obj.x, self.colorplot_obj.y)
+        else:
+            return ()
 
 defaults.load(PlotColorplot)
