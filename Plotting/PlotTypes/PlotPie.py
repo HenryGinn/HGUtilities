@@ -14,7 +14,14 @@ class PlotPie(Plot):
     def plot_data(self):
         pie_obj = self.pie_obj
         self.ax.pie(pie_obj.values, labels=pie_obj.labels,
-                    colors=pie_obj.color)
+                    explode=pie_obj.explode, colors=pie_obj.colors,
+                    hatch=pie_obj.hatch, autopct=pie_obj.autopct,
+                    pctdistance=pie_obj.pctdistance, labeldistance=pie_obj.labeldistance,
+                    shadow=pie_obj.shadow, startangle=pie_obj.startangle,
+                    radius=pie_obj.radius, counterclock=pie_obj.counterclock,
+                    wedgeprops=pie_obj.wedgeprops, textprops=pie_obj.textprops,
+                    center=pie_obj.center, frame=pie_obj.frame,
+                    rotatelabels=pie_obj.rotatelabels, normalize=pie_obj.normalize)
 
     def set_title(self):
         if self.pie_obj.title is not None:

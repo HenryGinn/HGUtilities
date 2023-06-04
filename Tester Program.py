@@ -22,7 +22,7 @@ values = [4, 2, 7]
 labels = ["Red", "Green", "Blue"]
 title = "Pie Chart Example"
 pie_obj = plotting.pie(values, labels, title=title,
-                       color=labels)
+                       colors=labels, test=False)
 
 # Creating surface object
 x_values = np.arange(0, 10, 0.01)
@@ -40,10 +40,9 @@ x_mesh, y_mesh = np.meshgrid(x_values, y_values)
 z_mesh = np.cos(x_mesh) + np.cos(y_mesh)
 title = "Colorplot Example"
 colormap_obj = plotting.colormap(x_mesh, y_mesh, z_mesh,
-                                   title=title)
-
-data_objects = [bars_obj, pie_obj, surface_obj, colormap_obj]
+                                 title=title)
 
 # Creation of figures
+data_objects = [bars_obj, pie_obj, surface_obj, colormap_obj]
 plotting.create_figures(data_objects)
 

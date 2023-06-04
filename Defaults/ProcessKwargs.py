@@ -41,6 +41,16 @@ class ProcessKwargs():
             self.key_words_to_add.append(key_word)
 
     def add_key_words_to_defaults(self):
+        if self.add_extra_defaults_to_file():
+            self.do_add_key_words_to_defaults()
+
+    def add_extra_defaults_to_file(self):
+        if "add_input_kwargs_to_file" in self.obj.defaults:
+            return self.obj.defaults["add_input_kwargs_to_file"]
+        else:
+            return False
+
+    def do_add_key_words_to_defaults(self):
         original_file_contents = load_json(self.obj.defaults_path, ignore_empty_or_none=True)
         new_file_contents = self.add_key_words_to_file_contents(original_file_contents)
         self.save_file_contents(original_file_contents, new_file_contents)

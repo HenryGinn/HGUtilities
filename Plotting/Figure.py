@@ -54,11 +54,11 @@ class Figure():
         self.output_figure()
 
     def initialise_figure(self):
+        self.fig = plt.figure(constrained_layout=True, dpi=self.dpi)
         self.create_axes()
         self.remove_extra_axes()
 
     def create_axes(self):
-        self.fig = plt.figure(constrained_layout=True, dpi=self.dpi)
         self.axes = [self.get_axis(index, data_obj)
                      for index, data_obj in enumerate(self.data_objects)]
 
