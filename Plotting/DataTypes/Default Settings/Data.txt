@@ -1,5 +1,11 @@
 {
   "title": null,
   "projection": null,
-  "axes": true
+  "axes": true,
+  "title_fontname": null,
+  "title_fontsize": null,
+  "axis_fontname": null,
+  "axis_fontsize": null,
+  "legend": false,
+  "loc": 0
 }

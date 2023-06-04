@@ -23,8 +23,4 @@ class PlotPie(Plot):
                     center=pie_obj.center, frame=pie_obj.frame,
                     rotatelabels=pie_obj.rotatelabels, normalize=pie_obj.normalize)
 
-    def set_title(self):
-        if self.pie_obj.title is not None:
-            self.ax.set_title(self.pie_obj.title)
-
 defaults.load(PlotPie)

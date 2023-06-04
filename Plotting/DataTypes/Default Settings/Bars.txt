@@ -4,5 +4,7 @@
   "bottom": 0,
   "log": false,
   "animated": null,
-  "bounds": null
+  "bounds": null,
+  "x_label": null,
+  "y_label": null
 }

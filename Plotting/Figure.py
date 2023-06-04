@@ -9,7 +9,7 @@ import Defaults as defaults
 from Plotting.PlotTypes.PlotLines import PlotLines
 from Plotting.PlotTypes.PlotBars import PlotBars
 from Plotting.PlotTypes.PlotPie import PlotPie
-from Plotting.PlotTypes.PlotColormap import PlotColormap
+from Plotting.PlotTypes.PlotColorplot import PlotColorplot
 from Plotting.PlotTypes.PlotSurface import PlotSurface
 from Plotting.PlotUtils.GridDimensions import get_grid_dimensions
 from Plotting.PlotUtils.SaveFigure import save_figure
@@ -22,7 +22,7 @@ class Figure():
         cls.plot_classes = {"Lines": PlotLines,
                             "Bars": PlotBars,
                             "Pie": PlotPie,
-                            "Colormap": PlotColormap,
+                            "Colorplot": PlotColorplot,
                             "Surface": PlotSurface}
     
     def __init__(self, figures_obj, data_objects, plot_index, **kwargs):

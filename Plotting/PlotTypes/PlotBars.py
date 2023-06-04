@@ -17,10 +17,6 @@ class PlotBars(Plot):
         self.between_group_spacing = self.bars_obj.between_group_spacing
         self.within_group_spacing = self.bars_obj.within_group_spacing
 
-    def set_title(self):
-        if self.bars_obj.title is not None:
-            self.ax.set_title(self.bars_obj.title)
-
     def plot_data(self):
         self.preprocess_bars()
         for index, bar_obj in enumerate(self.bars_obj.bar_objects):
@@ -77,5 +73,9 @@ class PlotBars(Plot):
                     log=bars_obj.log, agg_filter=bar_obj.agg_filter,
                     alpha=bar_obj.alpha, angle=bar_obj.angle,
                     animated=bars_obj.animated, antialiased=bar_obj.antialiased)
+
+    def add_axis_labels(self):
+        self.add_x_label()
+        self.add_y_label()
 
 defaults.load(PlotBars)

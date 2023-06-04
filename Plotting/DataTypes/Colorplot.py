@@ -3,7 +3,7 @@ import numpy as np
 import Defaults as defaults
 from Plotting.DataTypes.Data import Data
 
-class Colormap(Data):
+class Colorplot(Data):
 
     def __init__(self, x_mesh, y_mesh, z_mesh, **kwargs):
         Data.__init__(self, **kwargs)
@@ -15,4 +15,4 @@ class Colormap(Data):
         self.y_mesh = y_mesh
         self.z_mesh = z_mesh
 
-defaults.load(Colormap)
+defaults.load(Colorplot)
