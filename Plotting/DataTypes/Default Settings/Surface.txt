@@ -16,7 +16,7 @@
   "segments": null,
   "linewidths": null,
   "colors": null,
-  "antialiaseds": null,
+  "antialiased": null,
   "zorder": null,
   "edgecolors": null,
   "linestyles": null,

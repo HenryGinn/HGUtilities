@@ -63,16 +63,25 @@ class PlotBars(Plot):
     def plot_bar_obj(self, index, bar_obj):
         bars_obj = self.bars_obj
         x_values = self.get_x_values(index, bar_obj)
-        self.ax.bar(x_values, bar_obj.y_values,
-                    width=self.bar_width, bottom=bars_obj.bottom,
-                    color=bar_obj.color, edgecolor=bar_obj.edgecolor,
-                    linewidth=bar_obj.linewidth, tick_label=bar_obj.tick_label,
-                    label=bar_obj.label, xerr=bar_obj.xerr,
-                    yerr=bar_obj.yerr, ecolor=bar_obj.ecolor,
+        self.ax.bar(x_values,
+                    bar_obj.y_values,
+                    width=self.bar_width,
+                    bottom=bars_obj.bottom,
+                    color=bar_obj.color,
+                    edgecolor=bar_obj.edgecolor,
+                    linewidth=bar_obj.linewidth,
+                    tick_label=bar_obj.tick_label,
+                    label=bar_obj.label,
+                    xerr=bar_obj.xerr,
+                    yerr=bar_obj.yerr,
+                    ecolor=bar_obj.ecolor,
                     capsize=bar_obj.capsize,
-                    log=bars_obj.log, agg_filter=bar_obj.agg_filter,
-                    alpha=bar_obj.alpha, angle=bar_obj.angle,
-                    animated=bars_obj.animated, antialiased=bar_obj.antialiased)
+                    log=bars_obj.log,
+                    agg_filter=bar_obj.agg_filter,
+                    alpha=bar_obj.alpha,
+                    angle=bar_obj.angle,
+                    animated=bars_obj.animated,
+                    antialiased=bar_obj.antialiased)
 
     def add_axis_labels(self):
         self.add_x_label()
