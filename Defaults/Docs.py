@@ -40,16 +40,10 @@ class Docs():
 
     def get_doc_path(self, obj):
         module = sys.modules[obj.__module__]
-        folder_path = self.get_obj_folder_path(obj, module)
+        folder_path = os.path.split(module.__file__)[0]
         name = obj.__name__
         doc_path = self.get_doc_path_from_path_data(folder_path, name)
         return doc_path
-
-    def get_obj_folder_path(self, obj, module):
-        if inspect.isfunction(obj):
-            return os.path.splitext(module.__file__)[0]
-        else:
-            return os.path.split(module.__file__)[0]
 
     def get_doc_path_from_path_data(self, folder_path, name):
         doc_file_name = os.path.splitext(name)[0]

@@ -71,3 +71,5 @@ The aim of this is to improve quality of coding life by implementing some common
 - better distribution of subplots over multiple figures
 - control over tick labels
 - horizontal bar charts
+- better file extension handling for Defaults package
+- inherit function should be able to take in a single attribute as a non-iterable
