@@ -15,7 +15,7 @@ LONG_DESCRIPTION = ("Defaults: manages settings for classes that can be controll
 
 # Setting up
 setup(
-    name="hgutils",
+    name="hgutilities",
     version=VERSION,
     author="Henry Ginn",
     author_email="<henryginn137@gmail.com>",
@@ -26,10 +26,10 @@ setup(
     install_requires=["matplotlib", "numpy", "screeninfo", "PIL"],
     keywords=["python", "matplotlib", "plotting", "default", "keywords", "utils"],
     classifiers=[
-        "Development Status :: 1 - Alpha Testing",
-        "Intended Audience :: Personal use + morons",
+        "Development Status :: 1 - Planning",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
-        "Operating System :: Ubuntu",
+        "Operating System :: Unix",
         "Operating System :: Microsoft :: Windows",
     ]
 )
