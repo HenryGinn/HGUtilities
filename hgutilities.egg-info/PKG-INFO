@@ -1,13 +1,10 @@
 Metadata-Version: 2.1
 Name: hgutilities
-Version: 1.0.3
+Version: 1.0.4
 Summary: A triple of tools used for plotting, handling key-words, and utilities
-Home-page: UNKNOWN
 Author: Henry Ginn
 Author-email: <henryginn137@gmail.com>
-License: UNKNOWN
 Keywords: python,matplotlib,plotting,default,keywords,utils
-Platform: UNKNOWN
 Classifier: Development Status :: 1 - Planning
 Classifier: Intended Audience :: Developers
 Classifier: Programming Language :: Python :: 3
@@ -92,4 +89,3 @@ The aim of this is to improve quality of coding life by implementing some common
 - horizontal bar charts
 - better file extension handling for Defaults package
 - inherit function should be able to take in a single attribute as a non-iterable
-
