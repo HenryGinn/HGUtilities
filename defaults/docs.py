@@ -42,14 +42,12 @@ class Docs():
     def get_doc_path(self, obj):
         module = sys.modules[obj.__module__]
         folder_path = os.path.split(module.__file__)[0]
-        name = obj.__name__
+        name = os.path.splitext(obj.__name__)[0]
         doc_path = self.get_doc_path_from_path_data(folder_path, name)
         return doc_path
 
     def get_doc_path_from_path_data(self, folder_path, name):
-        doc_file_name = os.path.splitext(name)[0]
-        print(folder_path, name, doc_file_name)
-        doc_file_name = f"{doc_file_name}.txt"
+        doc_file_name = f"{name}.txt"
         doc_path = os.path.join(folder_path, "Documentation", doc_file_name)
         return doc_path
 
@@ -71,12 +69,11 @@ class Docs():
 
     def add_package_docs(self):
         doc_path = self.get_package_doc_path()
-        print(self.package_name, doc_path)
         doc_string = self.get_doc_string_from_path(doc_path)
         self.package.__doc__ = doc_string
 
     def get_package_doc_path(self):
-        name = self.package.__name__
+        name = self.package.__name__.split(".")[-1]
         doc_path = self.get_doc_path_from_path_data(self.package_path, name)
         return doc_path
 

@@ -77,19 +77,16 @@ class Plot():
     def add_x_label(self):
         if self.data_obj.x_label is not None:
             self.ax.set_xlabel(self.data_obj.x_label,
-                               **self.axis_font_kwargs,
-                               rot=self.data_obj.x_label_rotation)
+                               **self.axis_fontdict)
 
     def add_y_label(self):
         if self.data_obj.y_label is not None:
             self.ax.set_ylabel(self.data_obj.y_label,
-                               **self.axis_font_kwargs,
-                               rot=self.data_obj.z_label_rotation)
+                               **self.axis_fontdict)
 
     def add_z_label(self):
         if self.data_obj.z_label is not None:
             self.ax.set_zlabel(self.data_obj.z_label,
-                               **self.axis_font_kwargs,
-                               rot=self.data_obj.z_label_rotation)
+                               **self.axis_fontdict)
 
 defaults.load(Plot)

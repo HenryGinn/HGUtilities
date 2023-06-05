@@ -15,9 +15,6 @@
   "axis_color": null,
   "axis_labelpad": null,
   "axis_loc": null,
-  "x_axis_rotation": 0,
-  "y_axis_rotation": 0,
-  "z_axis_rotation": 0,
   "legend": false,
   "legend_loc": 0
 }

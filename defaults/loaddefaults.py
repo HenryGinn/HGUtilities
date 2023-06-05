@@ -16,7 +16,7 @@ class LoadDefaults():
     def set_defaults_path(self):
         module_path = traceback.extract_stack()[-3].filename
         parent_path, module_file_name = os.path.split(module_path)
-        defaults_file_name = f"{os.path.splitext(module_file_name)[0]}.txt"
+        defaults_file_name = f"{self.cls.__name__}.txt"
         self.cls.defaults_path = os.path.join(parent_path, "Default Settings", defaults_file_name)
 
     def set_defaults(self):
