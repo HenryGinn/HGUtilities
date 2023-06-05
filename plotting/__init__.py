@@ -1,23 +1,23 @@
-import Defaults as defaults
+from ..defaults import docs
 
 # Functions and classes to be accessed by the user
-from .PlotFunctions import create_figures
-from .PlotFunctions import create_animations
-from .DataTypes.Line import Line
-from .DataTypes.Lines import Lines
-from .DataTypes.Bars import Bars
-from .DataTypes.Bar import Bar
-from .DataTypes.Pie import Pie
-from .DataTypes.Surface import Surface
-from .DataTypes.Colorplot import Colorplot
+from .plotfunctions import create_figures
+from .plotfunctions import create_animations
+from .datatypes.line import Line as line
+from .datatypes.lines import Lines as lines
+from .datatypes.bars import Bars as bars
+from .datatypes.bar import Bar as bar
+from .datatypes.pie import Pie as pie
+from .datatypes.surface import Surface as surface
+from .datatypes.colorplot import Colorplot as colorplot
 
 # Classes that need initialisation
-from .Figure import Figure
-from .PlotTypes.PlotLines import PlotLines
-from .PlotTypes.PlotBars import PlotBars
-from .PlotTypes.PlotPie import PlotPie
-from .PlotTypes.PlotSurface import PlotSurface
-from .PlotTypes.PlotColorplot import PlotColorplot
+from .figure import Figure
+from .plottypes.plotlines import PlotLines
+from .plottypes.plotbars import PlotBars
+from .plottypes.plotpie import PlotPie
+from .plottypes.plotsurface import PlotSurface
+from .plottypes.plotcolorplot import PlotColorplot
 
 # Initialising classes
 Figure.set_plot_classes()
@@ -29,6 +29,6 @@ PlotColorplot.set_function_dict()
 
 # Importing other classes that have documentation
 # files so they can be detected by defaults.doc
-from .Animate import Animate
+from .animate import Animate
 
-defaults.docs()
+docs()
