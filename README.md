@@ -1,4 +1,4 @@
-# HGUtils
+# HGUtilities
 This is a collection of useful tools I use regularly. There are three parts to this package:
 
 - Defaults: manages settings for classes that can be controlled easily from an interface.
@@ -34,7 +34,7 @@ For each class, we store the default values in a json file. After the class defi
 
 Whenever a method takes in key word arguments, they can be passed into a function that processes the kwargs, along with a reference to the instance itself. This will automate the process described in the previous section, and if there are any key word arguments that were not in the list of defaults, the file will be opened and overwritten with the new key word arguments added. Their default value will be set to `None`. Below is an example of how this is implemented.
 
-    import Defaults as defaults
+    from hgutilities import defaults
 
     class MyClass():
 
