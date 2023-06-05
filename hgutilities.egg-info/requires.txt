@@ -1,4 +1,4 @@
-PIL
 matplotlib
 numpy
+pillow
 screeninfo
