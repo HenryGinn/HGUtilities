@@ -59,7 +59,7 @@ It also provides other functions such as easily applying a rainbow pattern to th
 
 ## Utils
 
-The aim of this is to improve quality of coding life by implementing some common functions. For example when reading a json file, you cannot simply open the file as load the json, you must first check whether it is empty. Such annoyances are handled by the functions in this part of the package. We split the utilities into several categories to make it easier to organise them. The functions implemented here are tailored to my personal needs, and they may not have the desired functionality for a general use case. Backwards compatibility is not guaranteed.
+The aim of this is to improve quality of coding life by implementing some common functions. For example when reading a json file, you cannot simply open the file and load the json, you must first check whether it is empty. Such annoyances are handled by the functions in this part of the package. We split the utilities into several categories to make it easier to organise them. The functions implemented here are tailored to my personal needs, and they may not have the desired functionality for a general use case. Backwards compatibility is not guaranteed.
 
 ## Development
 
