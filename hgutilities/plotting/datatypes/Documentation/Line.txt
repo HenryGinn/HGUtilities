@@ -10,6 +10,6 @@ Line.defaults shows a list of optional kwargs.
 
 For further documentation see the following:
 Lines, Data, and Figures classes
-https://github.com/HenryGinn/HGUtils
-https://github.com/HenryGinn/HGUtils/tree/main/Plotting
+https://github.com/HenryGinn/hgutilities
+https://github.com/HenryGinn/hgutilities/tree/main/hgutilities/plotting
 https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html

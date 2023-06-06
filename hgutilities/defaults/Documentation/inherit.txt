@@ -4,5 +4,5 @@ value for an attribute, the value will be inherited from the parent
 object.
 
 For further documentation see the following:
-https://github.com/HenryGinn/HGUtils
-https://github.com/HenryGinn/HGUtils/tree/main/Defaults
+https://github.com/HenryGinn/hgutilities
+https://github.com/HenryGinn/hgutilities/tree/main/hgutilities/defaults

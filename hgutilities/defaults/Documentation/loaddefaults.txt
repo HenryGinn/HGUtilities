@@ -8,10 +8,10 @@ the same folder as the script where the class is defined.
 After a class, (e.g. "MyClass") has been defined, calling
 "Defaults.load(MyClass)" will load from the file if it exists.
 
-Any key-word value pairs defined in parent classes will be
+Any keyword-value pairs defined in parent classes will be
 inherited.
 
 For further documentation see the following:
 kwargs
-https://github.com/HenryGinn/HGUtils
-https://github.com/HenryGinn/HGUtils/tree/main/Defaults
+https://github.com/HenryGinn/hgutilities
+https://github.com/HenryGinn/hgutilities/tree/main/hgutilities/defaults

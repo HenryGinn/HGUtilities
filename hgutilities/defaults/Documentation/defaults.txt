@@ -15,5 +15,5 @@ Functions defined here:
 
 For further documentation see the following:
 load, kwargs, docs, inherit
-https://github.com/HenryGinn/HGUtils
-https://github.com/HenryGinn/HGUtils/tree/main/Defaults
+https://github.com/HenryGinn/hgutilities
+https://github.com/HenryGinn/hgutilities/tree/main/hgutilities/defaults

@@ -24,15 +24,15 @@ Usually at the beginning of a class there will be a list of class variables with
 - Passing in many arguments to functions is messy
 - Mutable default values need to be implemented more carefully
 
-Normally there are two ways of handling key word arguments with default values.The simpler way is to have the key word in the function signature being set equal to it's default value. If it's default value is mutable, it will need to be set to None. Code will then need to be implemented to check if it has been changed, and if not, set it to it's default value. Once there are several key word arguemnts, this becomes messy however, and it would be preferred to pack the key words together with **kwargs. With this second method, there will need to be code that detects if a key word is in the **kwargs dict, and if so change it. This means we have a method for every key word argument a function takes in, and so we can easily end up with dozens of lines of code that clogs up our classes and is a chore to implement every time we change the key word arguments a function takes in.
+Normally there are two ways of handling keyword arguments with default values.The simpler way is to have the keyword in the function signature being set equal to it's default value. If it's default value is mutable, it will need to be set to None. Code will then need to be implemented to check if it has been changed, and if not, set it to it's default value. Once there are several keyword arguemnts, this becomes messy however, and it would be preferred to pack the keywords together with **kwargs. With this second method, there will need to be code that detects if a keyword is in the **kwargs dict, and if so change it. This means we have a method for every keyword argument a function takes in, and so we can easily end up with dozens of lines of code that clogs up our classes and is a chore to implement every time we change the keyword arguments a function takes in.
 
-In the second case, we cannot see what key word arguments a function takes in, and can only do so in the first case if the we are calling a function directly unless each function in the middle also has all the keywords in the signature. Modifying the default values would also mean going into the code, finding the method where the keyword is processed, and editing the code directly.
+In the second case, we cannot see what keyword arguments a function takes in, and can only do so in the first case if the we are calling a function directly unless each function in the middle also has all the keywords in the signature. Modifying the default values would also mean going into the code, finding the method where the keyword is processed, and editing the code directly.
 
 ### The Solution
 
 For each class, we store the default values in a json file. After the class definition, we pass the class itself into a function that loads the values from the file, and sets them as class variables. This code is only run once when the file with the class is imported. The class will also have the attribute "defaults" assigned to it with all the default values. This allows the user to read what the defaults are from the interface, but beyond that it serves to purpose after the default values have been loaded in. If the user overwrites it, they will no longer be able to see the defaults for that object (with `my_obj.defaults`), and will need to look at the class attribute itself (with `MyClass.defaults`).
 
-Whenever a method takes in key word arguments, they can be passed into a function that processes the kwargs, along with a reference to the instance itself. This will automate the process described in the previous section, and if there are any key word arguments that were not in the list of defaults, the file will be opened and overwritten with the new key word arguments added. Their default value will be set to `None`. Below is an example of how this is implemented.
+Whenever a method takes in keyword arguments, they can be passed into a function that processes the kwargs, along with a reference to the instance itself. This will automate the process described in the previous section, and if there are any keyword arguments that were not in the list of defaults, the file will be opened and overwritten with the new keyword arguments added. Their default value will be set to `None`. Below is an example of how this is implemented.
 
     from hgutilities import defaults
 
@@ -43,13 +43,13 @@ Whenever a method takes in key word arguments, they can be passed into a functio
 
     defaults.load(MyClass)
 
-We note that `defaults.kwargs` can be called from anywhere within the class and not just at initialisation, and that `**kwargs` or `kwargs` can be fed in as the second argument. If there are kwargs that require more complicated processing, they can be processed after the call to `defaults.kwargs`, and the default value of such key word arguments should be set to `null` in the json file of defaults.
+We note that `defaults.kwargs` can be called from anywhere within the class and not just at initialisation, and that `**kwargs` or `kwargs` can be fed in as the second argument. If there are kwargs that require more complicated processing, they can be processed after the call to `defaults.kwargs`, and the default value of such keyword arguments should be set to `null` in the json file of defaults.
 
 The path to the json file is stored as a class attribute `defaults_path`. In the directory that contains the script with the class, there will be another directory called "Default Settings", and this has the json files for all scripts in the original directory.
 
 ## Plotting
 
-For full documentation, see the specific README inside the "Plotting" module folder.
+For full documentation, see the specific README inside the "plotting" module folder.
 
 When creating a figure with varying characteristics, the user needs to change their code in potentially non-trivial ways in order to get the desired result. For example, if they had 12 subplots on a figure, and they decide that they want two figures with six subplots each instead, a single for loop would need to be split into two different for loops. If one of the subplots needed two lines plotted instead of one, they would either need to add that in manually outside of the loop, or change the whole data structure to make it more general. When the number of subplots is unknown, these problems are even worse. The aim of this part of the package is to make the creation of such figures easier.
 
@@ -73,3 +73,5 @@ The aim of this is to improve quality of coding life by implementing some common
 - horizontal bar charts
 - better file extension handling for Defaults package
 - inherit function should be able to take in a single attribute as a non-iterable
+- animations need to be made compatible with more plot types
+- add README to defaults subpackage
