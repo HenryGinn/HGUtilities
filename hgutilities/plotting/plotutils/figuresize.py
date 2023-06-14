@@ -18,12 +18,12 @@ def maximise_figure_attempt_2(mng):
 
 def maximise_figure_attempt_3(mng):
     try:
-        mng.window.state('zoomed')
+        mng.full_screen_toggle()
     except:
         maximise_figure_attempt_4(mng)
 
 def maximise_figure_attempt_4(mng):
     try:
-        mng.full_screen_toggle()
+        mng.window.state('zoomed')
     except:
         print("Could not maximise figure window")
