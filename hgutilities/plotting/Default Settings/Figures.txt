@@ -14,5 +14,6 @@
   "facecolor": "auto",
   "edgecolor": "auto",
   "backend": null,
-  "maximise": null
+  "maximise": null,
+  "plots_folder": false
 }
