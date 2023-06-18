@@ -1,43 +1,43 @@
 import os
 
-from matplotlib.pyplot import savefig
+import matplotlib.pyplot as plt
 
-def save_figure(plot_obj):
-    path = get_figure_path(plot_obj)
-    plots_obj = plot_obj.plots_obj
-    save_fig(path, plots_obj)
+def save_figure(figure_obj):
+    path = get_figure_path(figure_obj)
+    figures_obj = figure_obj.figures_obj
+    save_fig(path, figures_obj)
     plt.close()
 
-def get_figure_path(plot_obj):
-    file_name = get_file_name(plot_obj)
-    file_name = f"{file_name}.{plot_obj.plots_obj.format}"
-    path = os.path.join(plot_obj.plots_obj.path, file_name)
+def get_figure_path(figure_obj):
+    file_name = get_file_name(figure_obj)
+    file_name = f"{file_name}.{figure_obj.figures_obj.format}"
+    path = os.path.join(figure_obj.figures_obj.path, file_name)
     return path
 
-def get_file_name(plot_obj):
-    if len(plot_obj.plots_obj.lines_object_groups) == 1:
-        return get_base_file_name(plot_obj.plots_obj)
+def get_file_name(figure_obj):
+    if len(figure_obj.figures_obj.data_object_groups) == 1:
+        return get_base_file_name(figure_obj.figures_obj)
     else:
-        return get_numbered_file_name(plot_obj)
+        return get_numbered_file_name(figure_obj)
 
-def get_base_file_name(plot_objs):
-    if plot_objs.title is None:
+def get_base_file_name(figure_objs):
+    if figure_objs.title is None:
         return "Figure"
     else:
-        return str(plot_objs.title)
+        return str(figure_objs.title)
 
-def get_numbered_file_name(plot_obj):
-    file_name = get_base_file_name(plot_obj.plot_objs)
-    file_name = f"{file_name} {plot_obj.plot_index + 1}"
+def get_numbered_file_name(figure_obj):
+    file_name = get_base_file_name(figure_obj.figure_objs)
+    file_name = f"{file_name} {figure_obj.figure_index + 1}"
     return file_name
 
-def save_fig(path, plots_obj):
-    savefig(path,
-            dpi=plots_obj.dpi,
-            format=plots_obj.format,
-            metadata=plots_obj.metadata,
-            bbox_inches=plots_obj.bbox_inches,
-            pad_inches=plots_obj.pad_inches,
-            facecolor=plots_obj.facecolor,
-            edgecolor=plots_obj.edgecolor,
-            backend=plots_obj.backend)
+def save_fig(path, figures_obj):
+    plt.savefig(path,
+                dpi=figures_obj.dpi,
+                format=figures_obj.format,
+                metadata=figures_obj.metadata,
+                bbox_inches=figures_obj.bbox_inches,
+                pad_inches=figures_obj.pad_inches,
+                facecolor=figures_obj.facecolor,
+                edgecolor=figures_obj.edgecolor,
+                backend=figures_obj.backend)
