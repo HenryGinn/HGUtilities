@@ -1,5 +1,5 @@
 {
-  "title": null,
+  "suptitle": null,
   "dark": false,
   "maximise": true,
   "dpi": null,
@@ -22,6 +22,14 @@
   "axis_color": null,
   "axis_labelpad": null,
   "axis_loc": null,
+  "suptitle_fontname": null,
+  "suptitle_fontsize": null,
+  "suptitle_color": null,
+  "suptitle_verticalalignment": null,
+  "suptitle_horizontalalignment": null,
+  "suptitle_y": null,
+  "suptitle_pad": null,
+  "suptitle_loc": null,
   "x_axis_rotation": 0,
   "y_axis_rotation": 0,
   "z_axis_rotation": 0

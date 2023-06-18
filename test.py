@@ -14,7 +14,7 @@ def get_z_mesh_layer(time_value):
                     + np.sin(y_mesh + time_mesh))
     return z_mesh_layer
 
-time_values = np.arange(0, 2*np.pi, 0.1)
+time_values = np.arange(0, 2*np.pi, 1)
 z_meshes = [get_z_mesh_layer(time_value)
             for time_value in time_values]
 z_meshes = np.stack(z_meshes)
