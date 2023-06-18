@@ -89,4 +89,21 @@ class Plot():
             self.ax.set_zlabel(self.data_obj.z_label,
                                **self.axis_fontdict)
 
+    def set_tick_labels(self):
+        self.set_x_tick_labels()
+        self.set_y_tick_labels()
+
+    def set_x_tick_labels(self):
+        if hasattr(self.ax, "set_xticks"):
+            print(self.data_obj.x_ha)
+            self.ax.set_xticks(self.ax.get_xticks(), self.ax.get_xticklabels(),
+                               rotation=self.data_obj.x_rotation, ha=self.data_obj.x_ha,
+                               va=self.data_obj.x_va)
+
+    def set_y_tick_labels(self):
+        if hasattr(self.ax, "set_yticks"):
+            self.ax.set_yticks(self.ax.get_yticks(), self.ax.get_yticklabels(),
+                               rotation=self.data_obj.y_rotation, ha=self.data_obj.y_ha,
+                               va=self.data_obj.y_va)
+
 defaults.load(Plot)

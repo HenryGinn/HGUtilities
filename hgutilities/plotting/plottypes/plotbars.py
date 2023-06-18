@@ -18,6 +18,10 @@ class PlotBars(Plot):
         self.within_group_spacing = self.bars_obj.within_group_spacing
 
     def plot_data(self):
+        self.plot_bars()
+        self.set_tick_labels()
+
+    def plot_bars(self):
         self.preprocess_bars()
         for index, bar_obj in enumerate(self.bars_obj.bar_objects):
             self.plot_bar_obj(index, bar_obj)

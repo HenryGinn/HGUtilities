@@ -16,5 +16,11 @@
   "axis_labelpad": null,
   "axis_loc": null,
   "legend": false,
-  "legend_loc": 0
+  "legend_loc": null,
+  "x_rotation": null,
+  "y_rotation": null,
+  "x_ha": "center",
+  "y_ha": "right",
+  "x_va": "top",
+  "y_va": "center"
 }

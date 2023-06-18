@@ -21,6 +21,10 @@ class PlotLines(Plot):
         defaults.kwargs(self, kwargs)
 
     def plot_data(self):
+        self.plot_lines()
+        self.set_tick_labels()
+
+    def plot_lines(self):
         plot_type_function = self.get_plot_type_function()
         plot_function = getattr(self.ax, self.lines_obj.plot_type)
         for line_obj in self.lines_obj.line_objects:

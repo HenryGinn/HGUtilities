@@ -1,5 +1,4 @@
 {
-  "suptitle": null,
   "dark": false,
   "maximise": true,
   "dpi": null,
