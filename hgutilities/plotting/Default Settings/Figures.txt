@@ -1,7 +1,6 @@
 {
   "aspect_ratio": 1.7,
   "title": null,
-  "suptitle_fontsize": null,
   "subplots": null,
   "universal_legend": false,
   "output": "Show",

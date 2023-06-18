@@ -78,14 +78,24 @@ class Figure():
             ax.remove()
 
     def add_figure_peripherals(self):
+        self.set_suptitle_fontdict()
         self.set_suptitle()
         self.set_universal_legend()
         self.set_figure_size()
 
+    def set_suptitle_fontdict(self):
+        kwargs = {"fontname": self.suptitle_fontname,
+                  "fontsize": self.suptitle_fontsize,
+                  "color": self.suptitle_color,
+                  "verticalalignment": self.suptitle_verticalalignment,
+                  "horizontalalignment": self.suptitle_horizontalalignment}
+        self.suptitle_fontdict = remove_none_values(kwargs)
+
     def set_suptitle(self):
-        if self.figures_obj.title is not None:
-            self.fig.suptitle(f"{self.figures_obj.title}",
-                              fontsize=self.figures_obj.suptitle_fontsize)
+        if self.figures_obj.suptitle is not None:
+            self.fig.suptitle(f"{self.figures_obj.suptitle}",
+                              **self.suptitle_fontdict, loc=self.suptitle_loc,
+                              y=self.suptitle_y, pad=self.suptitle_pad)
 
     def set_universal_legend(self):
         if self.figures_obj.universal_legend:
