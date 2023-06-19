@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = "1.0.7"
+VERSION = "1.0.8.6"
 DESCRIPTION = "A triple of tools used for plotting, handling key-words, and utilities"
 LONG_DESCRIPTION = ("Defaults: manages settings for classes that can be controlled easily from an interface.\n"
                     "Plotting: a front end for matplotlib to easily create subplots.\n"
@@ -24,7 +24,7 @@ setup(
     long_description=long_description,
     setup_requires=['setuptools_scm'],
     include_package_data=True,
-    install_requires=["matplotlib", "numpy", "screeninfo", "pillow", "imageio"],
+    install_requires=["matplotlib", "numpy", "screeninfo", "pillow"],
     keywords=["python", "matplotlib", "plotting", "default", "keywords", "utils"],
     classifiers=[
         "Development Status :: 4 - Beta",

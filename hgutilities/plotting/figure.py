@@ -95,8 +95,8 @@ class Figure():
     def set_suptitle(self):
         if self.figures_obj.suptitle is not None:
             self.fig.suptitle(f"{self.figures_obj.suptitle}",
-                              **self.suptitle_fontdict, loc=self.suptitle_loc,
-                              y=self.suptitle_y, pad=self.suptitle_pad)
+                              **self.suptitle_fontdict,
+                              x=self.suptitle_x, y=self.suptitle_y)
 
     def set_universal_legend(self):
         if self.figures_obj.universal_legend:

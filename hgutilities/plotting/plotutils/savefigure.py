@@ -9,22 +9,34 @@ def save_figure(figure_obj):
     plt.close()
 
 def get_figure_path(figure_obj):
+    if figure_obj.path is not None:
+        return figure_obj.path
+    else:
+        return get_default_figure_path(figure_obj)
+
+def get_default_figure_path(figure_obj):
     file_name = get_file_name(figure_obj)
     file_name = f"{file_name}.{figure_obj.figures_obj.format}"
-    path = os.path.join(figure_obj.figures_obj.path, file_name)
+    path = os.path.join(figure_obj.figures_obj.base_path, file_name)
     return path
 
 def get_file_name(figure_obj):
+    if figure_obj.file_name is not None:
+        return figure_obj.file_name
+    else:
+        return get_default_file_name(figure_obj)
+
+def get_default_file_name(figure_obj):
     if len(figure_obj.figures_obj.data_object_groups) == 1:
         return get_base_file_name(figure_obj.figures_obj)
     else:
         return get_numbered_file_name(figure_obj)
 
-def get_base_file_name(figure_objs):
-    if figure_objs.title is None:
+def get_base_file_name(figure_obj):
+    if figure_obj.title is None:
         return "Figure"
     else:
-        return str(figure_objs.title)
+        return str(figure_obj.title)
 
 def get_numbered_file_name(figure_obj):
     file_name = get_base_file_name(figure_obj.figure_objs)

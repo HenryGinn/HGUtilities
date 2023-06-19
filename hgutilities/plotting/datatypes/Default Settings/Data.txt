@@ -22,5 +22,13 @@
   "x_ha": "center",
   "y_ha": "right",
   "x_va": "top",
-  "y_va": "center"
+  "y_va": "center",
+  "xlim_lower": null,
+  "xlim_upper": null,
+  "ylim_lower": null,
+  "ylim_upper": null,
+  "xbound_lower": null,
+  "xbound_upper": null,
+  "ybound_lower": null,
+  "ybound_upper": null
 }

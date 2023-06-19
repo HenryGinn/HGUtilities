@@ -23,6 +23,8 @@ class PlotLines(Plot):
     def plot_data(self):
         self.plot_lines()
         self.set_tick_labels()
+        self.set_axis_limits()
+        self.set_axis_bounds()
 
     def plot_lines(self):
         plot_type_function = self.get_plot_type_function()

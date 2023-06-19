@@ -95,7 +95,6 @@ class Plot():
 
     def set_x_tick_labels(self):
         if hasattr(self.ax, "set_xticks"):
-            print(self.data_obj.x_ha)
             self.ax.set_xticks(self.ax.get_xticks(), self.ax.get_xticklabels(),
                                rotation=self.data_obj.x_rotation, ha=self.data_obj.x_ha,
                                va=self.data_obj.x_va)
@@ -105,5 +104,33 @@ class Plot():
             self.ax.set_yticks(self.ax.get_yticks(), self.ax.get_yticklabels(),
                                rotation=self.data_obj.y_rotation, ha=self.data_obj.y_ha,
                                va=self.data_obj.y_va)
+
+    def set_axis_limits(self):
+        self.set_xlimits()
+        self.set_ylimits()
+
+    def set_xlimits(self):
+        if hasattr(self.ax, "set_xlim"):
+            self.ax.set_xlim(left=self.data_obj.xlim_lower,
+                             right=self.data_obj.xlim_upper)
+
+    def set_ylimits(self):
+        if hasattr(self.ax, "set_ylim"):
+            self.ax.set_ylim(bottom=self.data_obj.ylim_lower,
+                             top=self.data_obj.ylim_upper)
+
+    def set_axis_bounds(self):
+        self.set_xbounds()
+        self.set_ybounds()
+
+    def set_xbounds(self):
+        if hasattr(self.ax, "set_xbound"):
+            self.ax.set_xbound(lower=self.data_obj.xbound_lower,
+                               upper=self.data_obj.xbound_upper)
+
+    def set_ybounds(self):
+        if hasattr(self.ax, "set_ybound"):
+            self.ax.set_ybound(lower=self.data_obj.ybound_lower,
+                               upper=self.data_obj.ybound_upper)
 
 defaults.load(Plot)

@@ -4,7 +4,7 @@
   "subplots": null,
   "universal_legend": false,
   "output": "Show",
-  "path": null,
+  "base_path": null,
   "dpi": "figure",
   "format": "pdf",
   "metadata": null,

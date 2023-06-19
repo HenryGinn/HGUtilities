@@ -45,20 +45,20 @@ class Figures():
 
     def process_output_mode(self):
         if self.output == "Save":
-            self.set_path()
+            self.set_base_path()
 
-    def set_path(self, plots_folder_name="Plots"):
-        self.set_default_path()
+    def set_base_path(self, plots_folder_name="Plots"):
+        self.set_default_base_path()
         self.split_on_plots_folder(plots_folder_name)
 
-    def set_default_path(self):
-        if self.path is None:
-            self.path = os.path.split(__main__.__file__)[0]
+    def set_default_base_path(self):
+        if self.base_path is None:
+            self.base_path = os.path.split(__main__.__file__)[0]
 
     def split_on_plots_folder(self, plots_folder_name):
         if self.plots_folder:
-            self.path = os.path.join(self.path, plots_folder_name)
-            make_folder(self.path)
+            self.base_path = os.path.join(self.base_path, plots_folder_name)
+            make_folder(self.base_path)
 
     def process_data_objects(self):
         self.subplots = get_group_size(self.subplots, self.data_objects)
