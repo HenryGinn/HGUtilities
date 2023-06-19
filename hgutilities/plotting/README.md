@@ -12,6 +12,7 @@
 1. [Features](#features)
     1. [Universal Legend](#universal-legend)
     1. [Subplot Adjustment](#subplot-adjustment)
+    1. [Quick Plot](#quick-plot)
 
 ## Overview and Structure
 
@@ -199,3 +200,17 @@ The universal legend is a tool that can be used if all subplots in a figure have
 ### Subplot Adjustment
 
 Note: this feature has not been implemented yet. If the optional keyword argument, `adjust_subplots=True` is passed in to `create_figures` (or `create_animation`), then the matplotlib subplot adjustment tool will appear when the figures are created. The subplots are usually plotted with using the constrained layout, but in this case that will be turned off and tight layout used instead.
+
+### Quick Plot
+
+This generates a figure from saved data with a single line of code. It gives very little control and the aim is to get an idea of what the data looks like very fast. The format of the files with the data are expected to have a single line header with the names of the variables and these will be used as the axis labels. The columns are assumed to be separated by tabs, but this is controllable with the `separator` keyword. The independent and dependent variables are assumed to be the 0'th and 1st columns, but these can be changed with the `x` and `y` keyword arguments. The main control is given by the form of the input of the data to plot, detailed below.
+
+- Path to file. A single plot with a single line on it.
+- Path to folder with `one_line_per_plot=True`. Each file within the folder will be plotted on it's own subplot.
+- Path to folder with `one_line_per_plot=False`. All files within the folder will be plotted on one subplot.
+- List of paths to files with `one_line_per_plot=True`. Each file plotting on it's own subplot.
+- List of paths to files with `one_line_per_plot=False`. All files plotting on one subplot.
+- Two dimensional list of paths to files. Each outer list corresponds to one subplot.
+- List of paths to folders. The contents of each folder will be plotted on one subplot each.
+
+If a dictionary is given in place of a list/tuple/array then the values will be used and not the keys.

@@ -1,8 +1,11 @@
 from ..defaults import docs
 
-# Functions and classes to be accessed by the user
+# Functions to be accessed by the user
 from .plotfunctions import create_figures
 from .plotfunctions import create_animations
+from .plotfunctions import quick
+
+# Classes to be accessed by the user
 from .datatypes.line import Line as line
 from .datatypes.lines import Lines as lines
 from .datatypes.bars import Bars as bars
@@ -30,5 +33,6 @@ PlotColorplot.set_function_dict()
 # Importing other classes that have documentation
 # files so they can be detected by defaults.doc
 from .animate import Animate
+from .quick import Quick
 
 docs()
