@@ -165,6 +165,7 @@ hgutilities/utils/filenames.py
 hgutilities/utils/groups.py
 hgutilities/utils/paths.py
 hgutilities/utils/plots.py
+hgutilities/utils/printiterable.py
 hgutilities/utils/readwrite.py
 hgutilities/utils/__pycache__/__init__.cpython-310.pyc
 hgutilities/utils/__pycache__/dicts.cpython-310.pyc

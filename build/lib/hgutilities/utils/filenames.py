@@ -1,6 +1,8 @@
 import time
 import os
-from hgutilities import defaults
+
+from .. import defaults
+from .paths import get_file_name_from_path
 
 class FileName():
 
@@ -10,6 +12,7 @@ class FileName():
         self.set_file_name()
 
     def set_input_dict(self, input_dict):
+        print(input_dict)
         self.input_dict = {self.ensure_pascal_case(key): self.convert_to_dict(value)
                       for key, value in input_dict.items()}
 
@@ -62,5 +65,7 @@ def get_file_name(input_dict, **kwargs):
     return file_name_obj.file_name
 
 def read_file_name(file_name):
-    data = dict(item.split("_")[:2] for item in os.path.splitext(file_name)[0].split("__"))
+    name = get_file_name_from_path(file_name)
+    data = dict(item.split("_")[:2]
+                for item in name.split("__"))
     return {key: float(value) for key, value in data.items()}

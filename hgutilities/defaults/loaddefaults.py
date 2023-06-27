@@ -3,9 +3,6 @@ import inspect
 import os
 import json
 
-from ..utils.paths import make_file
-from ..utils.paths import load_json
-
 class LoadDefaults():
 
     def __init__(self, cls):
@@ -42,3 +39,16 @@ class LoadDefaults():
     def set_default_values(self):
         for parameter_name, parameter_value in self.cls.defaults.items():
             setattr(self.cls, parameter_name, parameter_value)
+
+# These have been copied from utils to avoid a circular import
+
+def load_json(path, ignore_empty_or_none=True):
+    if ignore_empty_or_none:
+        if not os.path.exists(path) or os.stat(path).st_size == 0:
+            return {}
+    return do_load_json(path)
+
+def do_load_json(path):
+    with open(path, "r") as file:
+        file_contents = json.load(file)
+    return file_contents

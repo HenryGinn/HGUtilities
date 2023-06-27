@@ -1,6 +1,11 @@
+import os
+
 import numpy as np
 
+from .paths import make_folder
+
 def save_to_path(path, data):
+    make_folder(path, force=True)
     with open(path, "w") as file:
         write_header_to_file(file, data)
         write_columns_to_file(file, data)

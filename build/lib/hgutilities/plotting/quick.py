@@ -10,10 +10,10 @@ from ..utils import readwrite
 class Quick():
 
     def __init__(self, path_input, **kwargs):
-        self.path_input = deepcopy(path_input)
-        self.process_path_input()
         self.kwargs = kwargs
         defaults.kwargs(self, kwargs)
+        self.path_input = deepcopy(path_input)
+        self.process_path_input()
 
     def process_path_input(self):
         if isinstance(self.path_input, str):
@@ -29,9 +29,12 @@ class Quick():
 
     def process_path_input_string_dir(self):
         if self.one_line_per_plot:
+            print("A")
             self.paths = [[os.path.join(self.path_input, path)] for path in os.listdir(self.path_input)]
         else:
+            print("B")
             self.paths = [[os.path.join(self.path_input, path) for path in os.listdir(self.path_input)]]
+        print(self.paths)
 
     def process_path_input_string_non_dir(self):
         if os.path.isfile(self.path_input):

@@ -57,6 +57,7 @@ class Figure():
     def initialise_figure(self):
         self.set_figure()
         self.create_axes()
+        self.add_universal_legend_axis()
         self.remove_extra_axes()
 
     def set_figure(self):
@@ -72,6 +73,12 @@ class Figure():
         axis = self.fig.add_subplot(self.rows, self.columns, index + 1,
                                     projection=data_obj.projection)
         return axis
+
+    def add_universal_legend_axis(self):
+        if self.figures_obj.universal_legend:
+            axis = self.fig.add_subplot(self.rows, self.columns,
+                                        len(self.data_objects) + 1)
+            self.axes.append(axis)
     
     def remove_extra_axes(self):
         extra_axes_count = len(self.axes) - self.count
@@ -104,8 +111,8 @@ class Figure():
 
     def do_universal_legend(self):
         ax = self.axes[-1]
-        for data_obj in self.data_objects[0].data_objects:
-            ax.plot(1, 1, label=data_obj.label, color=data_obj.colour)
+        for line_obj in self.data_objects[0].line_objects:
+            ax.plot(1, 1, label=line_obj.label, color=line_obj.color)
         ax.legend(loc="center", borderpad=2, labelspacing=1)
         ax.axis("off")
 

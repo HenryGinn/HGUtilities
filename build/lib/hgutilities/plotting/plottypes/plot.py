@@ -90,8 +90,9 @@ class Plot():
                                **self.axis_fontdict)
 
     def set_tick_labels(self):
-        self.set_x_tick_labels()
-        self.set_y_tick_labels()
+        #self.set_x_tick_labels()
+        #self.set_y_tick_labels()
+        pass
 
     def set_x_tick_labels(self):
         if hasattr(self.ax, "set_xticks"):
