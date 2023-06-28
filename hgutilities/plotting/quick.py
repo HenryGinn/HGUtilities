@@ -12,10 +12,22 @@ class Quick():
     def __init__(self, path_input, **kwargs):
         self.kwargs = kwargs
         defaults.kwargs(self, kwargs)
+        self.process_file_blacklist()
         self.path_input = deepcopy(path_input)
         self.process_path_input()
 
+    def process_file_blacklist(self):
+        if self.file_blacklist is None:
+            self.file_blacklist = []
+        else:
+            if isinstance(self.file_blacklist, str):
+                self.file_blacklist = [self.file_blacklist]
+
     def process_path_input(self):
+        self.set_paths()
+        self.filter_paths()
+
+    def set_paths(self):
         if isinstance(self.path_input, str):
             self.process_path_input_string()
         else:
@@ -28,13 +40,20 @@ class Quick():
             self.process_path_input_string_non_dir()
 
     def process_path_input_string_dir(self):
-        if self.one_line_per_plot:
-            print("A")
-            self.paths = [[os.path.join(self.path_input, path)] for path in os.listdir(self.path_input)]
+        self.paths = [self.get_paths_from_path(os.path.join(self.path_input, path))
+                      for path in os.listdir(self.path_input)]
+
+    def get_paths_from_path(self, path):
+        if os.path.isdir(path):
+            return [os.path.join(path, child_path) for child_path in os.listdir(path)]
         else:
-            print("B")
-            self.paths = [[os.path.join(self.path_input, path) for path in os.listdir(self.path_input)]]
-        print(self.paths)
+            return self.get_paths_from_paths_non_dir(path)
+
+    def get_paths_from_paths_non_dir(self, path):
+        if self.one_line_per_plot:
+            return [os.path.join(self.path_input, path)]
+        else:
+            return os.path.join(self.path_input, path)
 
     def process_path_input_string_non_dir(self):
         if os.path.isfile(self.path_input):
@@ -50,7 +69,7 @@ class Quick():
         raise ValueError(message)
 
     def process_path_input_non_string(self):
-        if hasattr(self.path_input, "__iter__"):
+        if hasattr(self.path_input, "_iter_"):
             self.process_path_input_iterable()
         else:
             self.non_iterable_non_string_exception(self.path_input)
@@ -85,7 +104,7 @@ class Quick():
             return element
 
     def get_path_non_string(self, element):
-        if hasattr(element, "__iter__"):
+        if hasattr(element, "_iter_"):
             return self.get_path_non_string_iterable(element)
         else:
             return self.non_iterable_non_string_exception(element)
@@ -96,8 +115,25 @@ class Quick():
         return element
 
     def ensure_two_dimensional_paths(self):
-        if not isinstance(self.paths, list):
+        if not isinstance(self.paths[0], list):
             self.paths = [self.paths]
+
+    def filter_paths(self):
+        self.paths = [self.get_filtered_path_list(path_list)
+                      for path_list in self.paths]
+        self.paths = [path_list for path_list in self.paths
+                      if len(path_list) != 0]
+
+    def get_filtered_path_list(self, path_list):
+        filtered_path_list = [path for path in path_list
+                              if self.path_passes_blacklist(path)]
+        return filtered_path_list
+
+    def path_passes_blacklist(self, path):
+        for blacklisted_string in self.file_blacklist:
+            if blacklisted_string in path:
+                return False
+        return True
     
     def create_figures(self, **kwargs):
         lines_objects = [self.get_lines_obj(paths_list) for paths_list in self.paths]
@@ -115,7 +151,7 @@ class Quick():
         keys = list(data_dict.keys())
         x_values = self.get_x_values(data_dict, keys)
         y_values = self.get_y_values(data_dict, keys)
-        line_obj = line(x_values, y_values)
+        line_obj = line(x_values, y_values, **self.kwargs)
         return line_obj
 
     def get_x_values(self, data_dict, keys):
