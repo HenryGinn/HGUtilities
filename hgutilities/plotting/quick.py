@@ -42,6 +42,8 @@ class Quick():
     def process_path_input_string_dir(self):
         self.paths = [self.get_paths_from_path(os.path.join(self.path_input, path))
                       for path in os.listdir(self.path_input)]
+        if isinstance(self.paths[0], str):
+            self.paths = [self.paths]
 
     def get_paths_from_path(self, path):
         if os.path.isdir(path):
