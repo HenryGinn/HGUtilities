@@ -44,7 +44,7 @@ class Figures():
         self.plot_data_objects(**kwargs)
 
     def process_output_mode(self):
-        if self.output == "Save":
+        if self.output in ["Save", "Both"]:
             self.set_base_path()
 
     def set_base_path(self, plots_folder_name="Plots"):

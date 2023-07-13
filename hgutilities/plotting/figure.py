@@ -1,6 +1,7 @@
 import os
 import math
 from screeninfo import get_monitors
+from copy import deepcopy
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -158,8 +159,17 @@ class Figure():
             self.show_figure()
         elif self.figures_obj.output == "Save":
             save_figure(self)
+        elif self.figures_obj.output == "Both":
+            self.show_and_save_figure()
 
     def show_figure(self):
+        self.fig.show()
+        self.fig.close()
+
+    def show_and_save_figure(self):
+        fig = deepcopy(self.fig)
+        save_figure(self)
+        self.fig = fig
         plt.show()
         plt.close()
 

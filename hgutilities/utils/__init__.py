@@ -1,5 +1,7 @@
 from .readwrite import save_to_path
 from .readwrite import read_from_path
+from .readwrite import combine_files
+from .readwrite import save_combined_files
 
 from .filenames import get_file_name
 from .filenames import read_file_name

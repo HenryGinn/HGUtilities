@@ -36,3 +36,41 @@ def get_data_from_file(file, separater):
             for line in file]
     columns = [np.array(column) for column in zip(*rows)]
     return columns
+
+
+def save_combined_files(folder_path, name="Combined.txt", blacklist=None):
+    results_path = os.path.join(folder_path, name)
+    data = combine_files(folder_path, blacklist=blacklist)
+    save_to_path(results_path, data)
+
+def combine_files(folder_path, blacklist=None):
+    blacklist = get_blacklist(blacklist)
+    paths = get_combined_paths(folder_path, blacklist)
+    data = get_data_from_paths(paths)
+    return data
+
+def get_blacklist(blacklist):
+    if blacklist is None:
+        blacklist = []
+    return blacklist
+
+def get_data_from_paths(paths):
+    contents = [read_from_path(path) for path in paths]
+    header = list(contents[0].keys())
+    data = {key: np.concatenate([partial_contents[key]
+                                 for partial_contents in contents],
+                                axis=0)
+            for key in header}
+    return data
+
+def get_combined_paths(folder_path, blacklist):
+    paths = [os.path.join(folder_path, file_name)
+             for file_name in os.listdir(folder_path)
+             if file_name_not_blacklisted(file_name, blacklist)]
+    return paths
+
+def file_name_not_blacklisted(file_name, blacklist):
+    for blacklisted_item in blacklist:
+        if blacklist in file_name:
+            return False
+    return True
