@@ -57,6 +57,7 @@ class Plot():
     def create_plot(self):
         self.plot_data()
         self.set_title()
+        self.match_labels()
         self.add_legend()
         self.add_axis_labels()
 
@@ -133,5 +134,8 @@ class Plot():
         if hasattr(self.ax, "set_ybound"):
             self.ax.set_ybound(lower=self.data_obj.ybound_lower,
                                upper=self.data_obj.ybound_upper)
+
+    def match_labels(self):
+        pass
 
 defaults.load(Plot)

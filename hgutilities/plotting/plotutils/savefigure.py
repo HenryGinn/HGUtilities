@@ -33,10 +33,10 @@ def get_default_file_name(figure_obj):
         return get_numbered_file_name(figure_obj)
 
 def get_base_file_name(figure_obj):
-    if figure_obj.title is None:
+    if figure_obj.suptitle is None:
         return "Figure"
     else:
-        return str(figure_obj.title)
+        return str(figure_obj.suptitle)
 
 def get_numbered_file_name(figure_obj):
     file_name = get_base_file_name(figure_obj.figure_objs)

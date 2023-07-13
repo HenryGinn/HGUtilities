@@ -149,4 +149,12 @@ class PlotLines(Plot):
         self.add_x_label()
         self.add_y_label()
 
+    def match_labels(self):
+        labels = [line_obj.label for line_obj in self.data_obj.line_objects]
+        for i, p in enumerate(self.ax.get_lines()):
+            if p.get_label() in labels[:i]:
+                idx = labels.index(p.get_label())
+                p.set_c(self.ax.get_lines()[idx].get_c())
+                p.set_label('_' + p.get_label())
+
 defaults.load(PlotLines)

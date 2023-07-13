@@ -25,10 +25,10 @@ def get_folder_path_for_make_folder(folder_path, force):
         return folder_path
 
 def get_folder_path(path):
-    if os.isfile(path):
-        return os.path.split(path)[0]
-    else:
-        return path
+    base_path, name = os.path.split(path)
+    if "." in name:
+        path = base_path
+    return path
 
 def make_folder_path(path):
     if os.path.isfile(path):
