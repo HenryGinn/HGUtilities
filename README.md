@@ -74,8 +74,6 @@ The aim of this is to improve quality of coding life by implementing some common
 - better file extension handling for Defaults package
 - inherit function should be able to take in a single attribute as a non-iterable
 - animations need to be made compatible with more plot types
-- add README to defaults subpackage
-- add control over data type in utils/read_from_path
 
 ### Version 1.1 Changes
 
@@ -83,3 +81,4 @@ The aim of this is to improve quality of coding life by implementing some common
 - Added separator kwarg to utils/save_to_path.
 - utils/save_combined_files now returns the data it has just saved.
 - utils/print_iterable now also returns the string it has just printed.
+- utils/read_from_path now handles non-float data types.

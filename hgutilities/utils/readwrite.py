@@ -19,23 +19,42 @@ def write_columns_to_file(file, data, separator):
     for row in rows:
         file.writelines(separator.join([str(value) for value in row]) + "\n")
 
-def read_from_path(path, separater=",", skip_first_n=0):
+def read_from_path(path, separater=",", skip_first_n=0,
+                   data_type=float, enforce_type=True):
     with open(path, "r") as file:
         skip_first_lines(file, skip_first_n)
         keys = file.readline().strip("% \n").split(separater)
-        values = get_data_from_file(file, separater)
+        values = get_data_from_file(file, separater, data_type, enforce_type)
         return dict(zip(keys, values))
 
 def skip_first_lines(file, skip_first_n):
     for line_number in range(skip_first_n):
         file.readline()
 
-def get_data_from_file(file, separater):
-    rows = [[float(number)
-             for number in line.strip().split(separater)]
-            for line in file]
-    columns = [np.array(column) for column in zip(*rows)]
+def get_data_from_file(file, separater, data_type, enforce_type):
+    rows = [line.strip().split(separater) for line in file]
+    columns = [process_column(column, data_type, enforce_type)
+               for column in zip(*rows)]
     return columns
+
+def process_column(column, data_type, enforce_type):
+    try:
+        column = [data_type(value) for value in column]
+    except:
+        return process_column_error(column, data_type, enforce_type)
+    return np.array(column)
+
+def process_column_error(column, data_type, enforce_type):
+    if enforce_type:
+        enforce_type_error_message(column, data_type)
+    else:
+        return column
+
+def enforce_type_error_message(column, data_type):
+        raise ValueError(f"Could not convert data to {data_type}\n"
+                         "Change the data type or see the enforce_type"
+                         "kwarg to False\n"
+                         f"First five entries: {column[:5]}")
 
 
 def save_combined_files(folder_path, blacklist=None, name="Combined.txt"):

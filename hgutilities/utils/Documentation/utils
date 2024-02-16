@@ -34,7 +34,7 @@ Reading and writing to files
 		Path to target location
 		Dictionary with data to be saved
 		separator (optional kwarg) - the string used to
-		separate columns
+			separate columns
 	outputs:
 		None
 		
@@ -46,22 +46,34 @@ Reading and writing to files
 	inputs:
 		Path to file to be read from
 		separator (optional kwarg) - the string expected
-		between columns. Default is ","
-		skip_first_n - how many lines are present before the
-		header. Default is 0
+			between columns. Default is ","
+		skip_first_n (optional kwarg)- how many lines are present
+			before the header. Default is 0
+		data_type (optional kwarg) - the type to convert the values
+			in the file to. Default is float
+		enforce_type (optional kwarg) - how to handle data type
+			errors. Default is True.
 	outputs:
 		Dictionary with content from path
 	
-	The data is expected to be rectangular with all columns the
-	same length.
+	This is a tool used to extract data from files, where all
+	delimiters are the same and all columns are the same length,
+	such as a csv. skip_first_n is used for when metadata is given
+	at the start of the file and would not fit into the expected
+	rectangular structure. If enforce_type is True then the program
+	crash if it cannot convert some data to a particular type, and
+	will return the data as an array of strings otherwise. The default
+	for enforce_type is True because it is assumed that any data that
+	cannot be converted is an error that the user does not know about,
+	and is unintended behaviour.
 	
 	
 	combine_files
 	inputs:
 		Path to a folder to be read from
 		blacklist (optional kwarg) - a list of strings that
-		should not appear as a substring in any of the
-		desired file names. Default is []
+			should not appear as a substring in any of the
+			desired file names. Default is []
 	outputs:
 		A dictionary of the collated data
 	
@@ -80,10 +92,10 @@ Reading and writing to files
 	inputs:
 		Path to a folder to be read from
 		blacklist (optional kwarg) - a list of strings that
-		should not appear as a substring in any of the
-		desired file names. Default is []
+			should not appear as a substring in any of the
+			desired file names. Default is []
 		name (optional kwarg) - the name of the file to save
-		the results to
+			the results to
 	outputs:
 		A dictionary of the collated data
 	
@@ -91,7 +103,7 @@ Reading and writing to files
 	and then saving it using save_to_path.
 
 
-Encoding and Decoding metadata stored in file names
+Encoding and decoding metadata stored in file names
 
 	get_file_name
 	inputs:
@@ -129,7 +141,7 @@ Printing iterables in a similar fashion to json.dumps
 		inputs:
 			An iterable object
 			indent (optional kwarg) - how many spaces of indentation
-			there should be between each level. Default is 2
+				there should be between each level. Default is 2
 		outputs:
 			A string
 		
@@ -143,7 +155,7 @@ Printing iterables in a similar fashion to json.dumps
 		inputs:
 			An iterable object
 			indent (optional kwarg) - how many spaces of indentation
-			there should be between each level. Default is 2
+				there should be between each level. Default is 2
 		outputs:
 			A string
 		
@@ -168,7 +180,7 @@ Processing file paths
 		inputs:
 			Path to target destination
 			force (optional kwarg) - if True then make the folder
-			even if it is the path to a file.
+				even if it is the path to a file.
 		outputs:
 		None
 		
@@ -234,26 +246,3 @@ Handling dictionaries and lists
 		
 		Removes any key-value pairs of a dictionary where the value
 		is None.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
