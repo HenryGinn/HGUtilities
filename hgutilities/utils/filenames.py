@@ -12,9 +12,9 @@ class FileName():
         self.set_file_name()
 
     def set_input_dict(self, input_dict):
-        print(input_dict)
-        self.input_dict = {self.ensure_pascal_case(key): self.convert_to_dict(value)
-                      for key, value in input_dict.items()}
+        self.input_dict = (
+            {self.ensure_pascal_case(key): self.convert_to_dict(value)
+             for key, value in input_dict.items()})
 
     def ensure_pascal_case(self, key):
         words = [word for word_unsplit in key.split(" ")

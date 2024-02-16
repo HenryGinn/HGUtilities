@@ -4,22 +4,22 @@ import numpy as np
 
 from .paths import make_folder
 
-def save_to_path(path, data):
+def save_to_path(path, data, separator=","):
     make_folder(path, force=True)
     with open(path, "w") as file:
-        write_header_to_file(file, data)
-        write_columns_to_file(file, data)
+        write_header_to_file(file, data, separator)
+        write_columns_to_file(file, data, separator)
 
-def write_header_to_file(file, data):
-    header_string = '\t'.join([str(key) for key in data.keys()])
+def write_header_to_file(file, data, separator):
+    header_string = separator.join([str(key) for key in data.keys()])
     file.writelines(header_string + "\n")
 
-def write_columns_to_file(file, data):
+def write_columns_to_file(file, data, separator):
     rows = zip(*list(data.values()))
     for row in rows:
-        file.writelines("\t".join([str(value) for value in row]) + "\n")
+        file.writelines(separator.join([str(value) for value in row]) + "\n")
 
-def read_from_path(path, separater="\t", skip_first_n=0):
+def read_from_path(path, separater=",", skip_first_n=0):
     with open(path, "r") as file:
         skip_first_lines(file, skip_first_n)
         keys = file.readline().strip("% \n").split(separater)
@@ -38,10 +38,11 @@ def get_data_from_file(file, separater):
     return columns
 
 
-def save_combined_files(folder_path, name="Combined.txt", blacklist=None):
+def save_combined_files(folder_path, blacklist=None, name="Combined.txt"):
     results_path = os.path.join(folder_path, name)
     data = combine_files(folder_path, blacklist=blacklist)
     save_to_path(results_path, data)
+    return data
 
 def combine_files(folder_path, blacklist=None):
     blacklist = get_blacklist(blacklist)

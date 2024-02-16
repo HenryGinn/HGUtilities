@@ -52,4 +52,6 @@ def end_of_iterable(non_iterable, string, level, indent):
     return string
 
 def print_iterable(iterable, indent=2):
-    print(get_iterable_string(iterable, indent=indent))
+    string = get_iterable_string(iterable, indent=indent))
+    print(string)
+    return string
