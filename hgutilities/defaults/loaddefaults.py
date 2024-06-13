@@ -14,7 +14,9 @@ class LoadDefaults():
         module_path = traceback.extract_stack()[-3].filename
         parent_path, module_file_name = os.path.split(module_path)
         defaults_file_name = f"{self.cls.__name__}.txt"
-        self.cls.defaults_path = os.path.join(parent_path, "Default Settings", defaults_file_name)
+        self.cls.defaults_path = os.path.join(parent_path,
+                                              "Default Settings",
+                                              defaults_file_name)
 
     def set_defaults(self):
         self.cls.defaults = {}
@@ -32,7 +34,8 @@ class LoadDefaults():
             self.cls.defaults.update({key_word: value})
 
     def add_defaults_from_file(self):
-        defaults_from_file = load_json(self.cls.defaults_path, ignore_empty_or_none=True)
+        defaults_from_file = load_json(self.cls.defaults_path,
+                                       ignore_empty_or_none=True)
         for key_word, value in defaults_from_file.items():
             self.cls.defaults.update({key_word: value})
 
