@@ -82,3 +82,5 @@ The aim of this is to improve quality of coding life by implementing some common
 - utils/save_combined_files now returns the data it has just saved.
 - utils/print_iterable now also returns the string it has just printed.
 - utils/read_from_path now handles non-float data types.
+- utils/dict renames to utils/iterables
+- Added print_dict_aligned to utils/dict

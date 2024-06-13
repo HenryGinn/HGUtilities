@@ -24,7 +24,9 @@ extra level of control. It is split into the following categories:
 	- remove_extension
 	
 - Handling dictionaries and lists
+	- remove_none_values
 	- transpose_list
+	- print_dict_aligned
 
 
 Reading and writing to files
@@ -226,7 +228,16 @@ Processing file paths
 	
 	
 Handling dictionaries and lists
-
+	
+	remove_none_values
+		inputs:
+			A dictionary
+		outputs:
+			A dictionary
+		
+		Removes any key-value pairs of a dictionary where the value
+		is None.
+		
 	transpose_list
 		inputs:
 			A list of lists
@@ -237,12 +248,12 @@ Handling dictionaries and lists
 		with two dimensional arrays, but for python lists. The rows
 		and columns are swapped around.
 	
-	
-	remove_none_values
+	print_dict_aligned
 		inputs:
 			A dictionary
 		outputs:
-			A dictionary
+			Printed entries of dictionary
 		
-		Removes any key-value pairs of a dictionary where the value
-		is None.
+		This takes each entry and pastes it on a line where all the
+		values are vertically aligned. Good for printing attributes
+		of an object or class.

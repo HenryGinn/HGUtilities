@@ -15,5 +15,6 @@ from .paths import load_json
 from .paths import get_file_name_from_path
 from .paths import remove_extension
 
-from .dicts import transpose_list
-from .dicts import remove_none_values
+from .iterables import transpose_list
+from .iterables import remove_none_values
+from .iterables import print_dict_aligned
