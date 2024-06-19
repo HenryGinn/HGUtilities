@@ -3,7 +3,7 @@ import matplotlib.font_manager
 import numpy as np
 
 from ... import defaults
-from ...utils.dicts import remove_none_values
+from ...utils.iterables import remove_none_values
 
 class Plot():
 

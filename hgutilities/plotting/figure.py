@@ -15,7 +15,7 @@ from .plottypes.plotsurface import PlotSurface
 from .plotutils.griddimensions import get_grid_dimensions
 from .plotutils.savefigure import save_figure
 from .plotutils.figuresize import maximise_figure
-from ..utils.dicts import remove_none_values
+from ..utils.iterables import remove_none_values
 
 class Figure():
     

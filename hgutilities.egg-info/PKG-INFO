@@ -1,13 +1,10 @@
 Metadata-Version: 2.1
 Name: hgutilities
-Version: 1.1.0
+Version: 1.1.3
 Summary: A triple of tools used for plotting, handling key-words, and utilities
-Home-page: UNKNOWN
 Author: Henry Ginn
-Author-email: <henryginn137@gmail.com>
-License: UNKNOWN
+Author-email: Henry Ginn <henryginn137@gmail.com>
 Keywords: python,matplotlib,plotting,default,keywords,utils
-Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: Programming Language :: Python :: 3
@@ -15,9 +12,13 @@ Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Classifier: Natural Language :: English
 Classifier: Operating System :: Unix
 Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE.md
-
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: screeninfo
+Requires-Dist: pillow
 
 ﻿# HGUtilities
 This is a collection of useful tools I use regularly. There are three parts to this package:
@@ -105,4 +106,3 @@ The aim of this is to improve quality of coding life by implementing some common
 - utils/read_from_path now handles non-float data types.
 - utils/dict renames to utils/iterables
 - Added print_dict_aligned to utils/dict
-

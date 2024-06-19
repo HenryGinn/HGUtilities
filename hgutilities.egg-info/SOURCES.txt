@@ -1,7 +1,7 @@
 LICENSE.md
 README.md
+pyproject.toml
 setup.py
-.eggs/README.txt
 .github/workflows/python-publish.yml
 hgutilities/__init__.py
 hgutilities.egg-info/PKG-INFO
