@@ -33,7 +33,7 @@ class FileName():
         component_names = [self.get_component_name(key, value_dict)
                            for key, value_dict in self.input_dict.items()]
         self.add_timestamp(component_names)
-        self.file_name = f"{'__'.join(component_names)}.txt"
+        self.file_name = f"{'__'.join(component_names)}"
 
     def get_component_name(self, key, value_dict):
         if "unit" in value_dict:

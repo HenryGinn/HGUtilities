@@ -28,6 +28,10 @@ extra level of control. It is split into the following categories:
 	- transpose_list
 	- print_dict_aligned
 
+- JSON Wrapper
+	- load
+	- dump
+	- dumps
 
 Reading and writing to files
 
@@ -257,3 +261,14 @@ Handling dictionaries and lists
 		This takes each entry and pastes it on a line where all the
 		values are vertically aligned. Good for printing attributes
 		of an object or class.
+
+
+JSON wrapper
+
+	Behaves like the built-in json package, but with the following
+	differences
+	
+		- Numpy arrays are serialised
+		- Numpy arrays with values close to integer are converted
+		- Non-dict iterables at the lowest level are written on
+			a single line

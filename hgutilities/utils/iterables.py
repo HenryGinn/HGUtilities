@@ -7,9 +7,9 @@ def transpose_list(my_list):
     transposed_list = list(map(list, zip(*my_list)))
     return transposed_list
 
-def print_dict_aligned(dictionary):
+def get_dict_string(dictionary):
     keys = list(dictionary.keys())
     max_length = max([len(str(key)) for key in keys])
-    for key, value in dictionary.items():
-        spaces = max_length - len(str(key))
-        print(f"{key}: {spaces*' '}{value}")
+    string = "\n".join([f"{key}: {(max_length - len(str(key)))*' '}{value}"
+                        for key, value in dictionary.items()])
+    return string
